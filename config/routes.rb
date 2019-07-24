@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   
+  devise_for :users
+  # devise_for :managers
+  # devise_for :client
+  # devise_for :admins
+
   namespace :dashboard do
     get 'dashboard/index'
   end
-  devise_for :users
   get 'dashboard/index'
   root to: "pages#index"
 

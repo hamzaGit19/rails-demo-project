@@ -1,2 +1,2 @@
-class Manager < ApplicationRecord
+class Manager < User
 end
