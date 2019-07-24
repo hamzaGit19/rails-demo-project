@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <title>DemoProject</title>
@@ -9,11 +8,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
- 
     <header>
-    <%= render "partials/navbar"%>
-     <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+      <%= render "partials/navbar"%>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
     </header>
     <%= yield %>
   </body>
