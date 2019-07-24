@@ -1,2 +1,9 @@
-<h1>Dashboard::Dashboard#index</h1>
-<p>Find me in app/views/dashboard/dashboard/index.html.erb</p>
+  <% if current_user.type =="Admin"%>
+  <%= render "dashboard/dashboard/partials/admin-dashboard"%>
+<%end%>
+<% if current_user.type =="Client"%>
+  This is client's dashboard
+<%end%>
+<% if current_user.type =="Manager"%>
+  This is Manager's dashboard
+<%end%>
