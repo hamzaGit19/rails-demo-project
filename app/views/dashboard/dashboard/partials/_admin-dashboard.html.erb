@@ -25,15 +25,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Tiger</td>
-            <td>Nixon</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
-            <td>61</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+          <% @users.each do |person| %>
+            <tr>
+              <td><%=person.name%></td>
+              <td><%=person.email%></td>
+              <td><%=person.type%></td>
+              <td><%=person.status%>
+               </td>
+              <td>
+              <%# <span> <%=link_to('Show',user, class:"btn btn-info btn-xs glyphicon glyphicon-edit")%></span> %>
+              
+            <span> <%= link_to('Delete',user_delete_path(person), method: :delete, data:{confirm: "are you sure?"} ,class:"btn btn-warning btn-xs glyphicon glyphicon-edit")%></span>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
 </div>
