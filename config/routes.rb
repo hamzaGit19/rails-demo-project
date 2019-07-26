@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   end
   namespace :admin do
     match ':id' => 'users#destroy', :via => :delete, :as => :user_delete
-    # match ':id(.:format)' => 'users#update', :via => :patch, :as=> :edit_admin_user
     resources :users
   end
+
+ resource:user, :controller => 'users'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
