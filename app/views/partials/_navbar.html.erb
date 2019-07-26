@@ -8,14 +8,10 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
-          <%= link_to 'Edit Profile', edit_user_registration_path%>
+          <%= link_to 'Profile', user_path%>
           <%# <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a> %>
         </li>
-      <%else%>
-        <li class="nav-item active">
-          <%= link_to 'Dummy', edit_user_registration_path%>
-          <%# <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a> %>
-        </li>
+      
       <%end%>
     </ul>
     <span class="navbar-text">
