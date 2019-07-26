@@ -12,8 +12,16 @@ Rails.application.routes.draw do
   namespace :dashboard do
     root to: 'dashboard#index'
   end
-  namespace :admin do 
-    resources :users
+
+  namespace :admin do
+    resources :users do 
+      match '' => 'users#destroy', :via => :delete, :as => :delete
+
+    end
+    
   end
+
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
