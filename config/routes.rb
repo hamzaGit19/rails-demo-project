@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   # get 'users/index'
-  match 'users/:id' => 'users#destroy', :via => :delete, :as => :user_delete
+  # match 'users/:id' => 'users#destroy', :via => :delete, :as => :user_delete
   devise_for :users
   namespace :dashboard do
     get 'dashboard/index'
@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users do 
-      match '' => 'users#destroy', :via => :delete, :as => :delete
+    match ':id' => 'users#destroy', :via => :delete, :as => :user_delete
 
+    resources :users do 
     end
     
   end
