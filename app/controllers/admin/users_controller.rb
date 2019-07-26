@@ -9,16 +9,19 @@ class Admin::UsersController < ApplicationController
   def update
   end
 
+  def edit 
+  end
+
   def destroy
     @user.destroy
     redirect_to dashboard_root_path, notice: "User deleted."
   end
 
   def user_params
-    params.require(:users).permit(:name, :email, :type, :user_id)
+    params.require(:users).permit(:name, :email, :type, :id)
   end
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
   end
 end
