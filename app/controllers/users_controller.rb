@@ -7,8 +7,9 @@ class UsersController < ApplicationController
   end
 
   # def destroy
-  #   @user = User.find(params[:id])
-  #   @user.destroy
-  #   redirect_to dashboard_root_path, notice: 'User deleted.'
+  #   sign_out :current_user
+  #   # @user = User.find(params[:id])
+  #   # @user.destroy
+  #   redirect_to dashboard_root_path, notice: 'sign out.'
   # end
 end
