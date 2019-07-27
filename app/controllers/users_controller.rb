@@ -9,7 +9,18 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def show 
+  def show
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def add_user
+    @user = User.new(user_params)
+    if @user.save!
+      redirect_to root_path
+    end
   end
 
   def update_password
@@ -26,9 +37,13 @@ class UsersController < ApplicationController
   def set_user
     @user = current_user
   end
+
   def password_params
     # NOTE: Using `strong_parameters` gem
     params.require(klass.to_s.underscore).permit(:password, :password_confirmation)
+  end
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation,:type,:name)
   end
 
   def klass

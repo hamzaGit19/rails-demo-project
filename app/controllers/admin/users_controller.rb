@@ -6,6 +6,10 @@ class Admin::UsersController < ApplicationController
   def index
   end
 
+  def new
+    redirect_to(new_user_registration_path)
+  end
+
   def update
     respond_to do |format|
       if @user.update(user_params)

@@ -21,18 +21,16 @@
  @import 'bootstrap';
  
  #sailorTableArea{
-    max-height: 300px;
-    overflow-x: auto;
-    overflow-y: auto;
+    max-height: 700px;
+     
 }
 #sailorTable{
     white-space: normal;
 }
 tbody {
     display:block;
-    height:200px;
-    overflow:auto;
-}
+    height:auto;
+ }
 thead, tbody tr {
     display:table;
     width:100%;
