@@ -42,7 +42,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.0.0'
 gem 'devise'
 gem 'jquery-rails'
- 
+gem 'pundit'
+gem 'kaminari'
+
 
 # Till here
 
