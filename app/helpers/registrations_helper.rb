@@ -8,7 +8,4 @@ module RegistrationsHelper
       %w[Client Client]
     ]
   end
-
-  
-
 end

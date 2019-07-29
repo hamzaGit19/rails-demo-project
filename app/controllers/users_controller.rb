@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       bypass_sign_in(@user)
       redirect_to root_path
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -42,8 +42,9 @@ class UsersController < ApplicationController
     # NOTE: Using `strong_parameters` gem
     params.require(klass.to_s.underscore).permit(:password, :password_confirmation)
   end
+
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation,:type,:name)
+    params.require(:user).permit(:email, :password, :password_confirmation, :type, :name)
   end
 
   def klass

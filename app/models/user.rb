@@ -22,6 +22,6 @@ class User < ApplicationRecord
   end
 
   def type?
-    self.type
+    type
   end
 end
