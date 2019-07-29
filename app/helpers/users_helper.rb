@@ -2,7 +2,6 @@
 
 module UsersHelper
   def options_for_user_types
- 
     if current_user.admin?
       options = [%w[Admin],
                  %w[Client], %w[Manager], %w[Employee]]
