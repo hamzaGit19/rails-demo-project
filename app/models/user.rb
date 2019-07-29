@@ -5,7 +5,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
-    paginates_per 7
+  paginates_per 7
+
+  scope :managerUsers, ->() { where.not type: %w(Admin) }
 
   def admin?
     instance_of?(Admin)
