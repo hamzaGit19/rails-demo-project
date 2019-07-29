@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable
   paginates_per 7
   mount_uploader :image, ImageUploader
 
@@ -25,13 +25,11 @@ class User < ApplicationRecord
 
   def image?
     if self.image.eql? "null"
-      return false 
-    else 
+      return false
+    else
       return true
-    
     end
   end
- 
 
   def type?
     type
