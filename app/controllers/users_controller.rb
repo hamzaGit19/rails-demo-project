@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: %i[edit update destroy show]
 
   def index
   end
@@ -14,6 +14,20 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+  end
+
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to dashboard_root_path, notice: "user was successfully updated." }
+        format.json { render :show, status: :ok, location: @user }
+        flash[:success] = "Woohoo!"
+
+      else
+        format.html { render "users/edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def add_user
@@ -30,7 +44,7 @@ class UsersController < ApplicationController
       bypass_sign_in(@user)
       redirect_to root_path
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -44,8 +58,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :type, :name, :image)
+    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status, :image)
   end
+
+  
 
   def klass
     @user.class
