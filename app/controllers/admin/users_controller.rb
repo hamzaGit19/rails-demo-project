@@ -31,7 +31,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status)
+    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status, :image)
   end
 
   def set_user
