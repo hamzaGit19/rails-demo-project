@@ -4,7 +4,11 @@ class Dashboard::DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    query = User.all
+    if params[:name]
+      query = User.where("name LIKE ?", "%#{params[:name]}%")
+    else
+      query = User.all
+    end
     if current_user.admin?
       # Do nothing as per now. Get all the users.
     elsif current_user.manager?
@@ -12,5 +16,9 @@ class Dashboard::DashboardController < ApplicationController
     end
     @users = query.all
     @users = @users.page(params[:page])
+  end
+
+  def search_params
+    params.require(:user).permit(:name)
   end
 end

@@ -40,5 +40,5 @@ class Admin::UsersController < ApplicationController
 
   def klass
     @user.class
-  end
+  end  
 end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update destroy show]
+  before_action :set_user
 
   def index
-  end
+    end
 
   def edit
   end
@@ -58,11 +58,11 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status, :image)
+    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status, :type)
   end
 
-  
 
+  
   def klass
     @user.class
   end
