@@ -6,15 +6,24 @@ Rails.application.routes.draw do
 
   get "register", to: "users#new"
   post "register", to: "users#add_user"
+
   namespace :dashboard do
     get "dashboard/index"
   end
+
   get "dashboard/index"
   root to: "pages#index"
+
   namespace :dashboard do
     root to: "dashboard#index"
   end
+
   namespace :admin do
+    match ":id" => "users#destroy", :via => :delete, :as => :user_delete
+    resources :users
+  end
+
+  namespace :manager do
     match ":id" => "users#destroy", :via => :delete, :as => :user_delete
     resources :users
   end
