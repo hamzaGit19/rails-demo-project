@@ -44,7 +44,8 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'pundit'
-
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick', '~> 4.3'
 
 # Till here
 
