@@ -40,12 +40,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Adding my own gems from here
 gem 'bootstrap', '~> 4.0.0'
+gem 'carrierwave', '~> 0.10.0'
 gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
-gem 'pundit'
-gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
+gem 'pundit'
+gem 'pundit'
 
 # Till here
 
