@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable
+         :recoverable, :rememberable
   paginates_per 7
   mount_uploader :image, ImageUploader
 
-  scope :managerUsers, ->() { where.not type: %w(Admin) }
+  scope :managerUsers, -> { where.not type: %w[Admin] }
 
   def admin?
     instance_of?(Admin)
@@ -24,10 +23,10 @@ class User < ApplicationRecord
   end
 
   def image?
-    if self.image.eql? "null"
-      return false
+    if image.eql? 'null'
+      false
     else
-      return true
+      true
     end
   end
 
