@@ -3,38 +3,26 @@
 class UsersController < ApplicationController
   before_action :set_user
 
-  def index
-    end
+  def index; end
 
-  def edit
-  end
+  def edit; end
 
-  def show
-  end
+  def show; end
 
-  def new
-    @user = User.new
-  end
+  def new; end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to dashboard_root_path, notice: "user was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-        flash[:success] = "Woohoo!"
-
-      else
-        format.html { render "users/edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      redirect_to dashboard_root_path, notice: 'user was successfully updated.'
+      flash[:success] = 'Woohoo!'
+    else
+      render 'users/edit'
     end
   end
 
   def add_user
-    @user = User.new(user_params)
-    if @user.save!
-      redirect_to root_path
-    end
+    @user = User.new(user_params2)
+    redirect_to root_path if @user.save!
   end
 
   def update_password
@@ -44,7 +32,7 @@ class UsersController < ApplicationController
       bypass_sign_in(@user)
       redirect_to root_path
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -58,11 +46,13 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status, :type)
+    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status, :type, :image)
   end
 
+  def user_params2
+    params.require(:user).permit(:name, :email, :password, :type)
+  end
 
-  
   def klass
     @user.class
   end
