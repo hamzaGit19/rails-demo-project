@@ -4,11 +4,11 @@ class Dashboard::DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if params[:name]
-      query = User.where("name LIKE ?", "%#{params[:name]}%")
-    else
-      query = User.all
-    end
+    query = if params[:name]
+              User.where('name LIKE ?', "%#{params[:name]}%")
+            else
+              User.all
+            end
     if current_user.admin?
       # Do nothing as per now. Get all the users.
     elsif current_user.manager?

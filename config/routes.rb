@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :registrations => 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   # get 'users/new' => 'users/registrations#new'
 
   get 'register', to: 'users#new'
