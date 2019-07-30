@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-class Manager::UsersController < ApplicationController
+class Manager::UsersController < ManagerBaseController
   before_action :set_user, only: %i[edit update destroy]
 
-  def index
-  end
+  def index; end
 
   def new
     redirect_to(new_user_registration_path)
@@ -23,6 +22,7 @@ class Manager::UsersController < ApplicationController
   end
 
   def edit
+    authorize @user, policy_class: ManagerPolicy
   end
 
   def destroy
