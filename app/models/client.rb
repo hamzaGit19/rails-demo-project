@@ -1,4 +1,5 @@
 # frozen_string_literal: true
 
-class Client < User
+class Client < ApplicationRecord
+  paginates_per 7
 end
