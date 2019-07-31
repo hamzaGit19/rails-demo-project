@@ -16,7 +16,7 @@ class Admin::UsersController < AdminBaseController
         format.html { redirect_to dashboard_root_path, notice: 'user was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render 'users/edit' }
+        format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

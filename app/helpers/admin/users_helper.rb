@@ -7,6 +7,6 @@ module Admin::UsersHelper
   end
 
   def get_status(status)
-    status == true ? 'Active' : 'inactive'
+    status ? 'Active' : 'inactive'
   end
 end
