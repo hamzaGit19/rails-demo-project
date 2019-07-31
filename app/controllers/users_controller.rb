@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     if @user.update(password_params)
       # Sign in the user by passing validation in case their password changed
       bypass_sign_in(@user)
-      redirect_to root_path
+      redirect_to root_path, notice: 'Password was successfully updated.'
     else
       render 'edit'
     end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(klass.to_s.underscore).permit(:name, :email, :id, :status, :type, :image)
+    params.require(klass.to_s.underscore).permit(:name, :email, :id, :image)
   end
 
   def user_params2
