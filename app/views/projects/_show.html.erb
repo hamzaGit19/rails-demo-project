@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                   <th>Company</th>
-                  <td><%= @project.name %></td>
+                  <td><%= get_company_name(@project.client_id) %></td>
                 </tr>
                 <tr>
                  <tr>
@@ -40,7 +40,7 @@
                   <td><%= get_manager_name(@project.manager_id) %></td>
                 </tr>
                   <th>Client</th>
-                  <td><%= @project.name %></td>
+                  <td><%= get_client_name(@project.client_id) %></td>
                 </tr>
                 <tr>
                   <th>Cost</th>
@@ -53,7 +53,7 @@
 
                  <tr>
                   <th>Created by:</th>
-                  <td><%= @project.creator_id %></td>
+                  <td><%= get_creator_name(@project.creator_id) %></td>
                 </tr>
 
               
