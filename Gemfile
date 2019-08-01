@@ -42,10 +42,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.0.0'
 gem 'carrierwave', '~> 0.10.0'
 gem 'devise'
+gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'mini_magick', '~> 4.3'
-gem 'pundit'
 gem 'pundit'
 
 # Till here

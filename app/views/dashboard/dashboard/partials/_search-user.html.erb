@@ -1,6 +1,8 @@
 <div class="row">
   <%= form_tag(dashboard_root_path, method: :get,class: 'form-horizontal col-sm-6 offset-md-3') do %>
-    <%= text_field_tag :name, nil, placeholder: 'Enter search term...', class: 'form-horizontal col-sm-9' %>
-    <%= submit_tag 'Search', class:"btn btn-primary" %>
+    <%= text_field_tag :name, nil, placeholder: 'Search a user...', class: 'form-horizontal col-sm-9' %>
+    <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+     <i class="fa fa-search"></i>
+<% end %>
   <% end %>
 </div>

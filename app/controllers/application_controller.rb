@@ -20,4 +20,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up) { |user| user.permit(:name, :email, :password, :type) }
     devise_parameter_sanitizer.permit(:account_update) { |user| user.permit(:name, :email, :type, :password, :current_password) }
   end
+
+  def page_not_found
+    respond_to do |format|
+      format.html { render template: 'errors/not_found_error', layout: 'layouts/application', status: 404 }
+      format.all  { render nothing: true, status: 404 }
+    end
+  end
 end

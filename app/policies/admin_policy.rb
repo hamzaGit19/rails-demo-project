@@ -6,7 +6,8 @@ class AdminPolicy < ApplicationPolicy
   end
 
   def create?
-    return true if @user.admin?
+    @user.admin?
+    # return true if @user.admin?
   end
 
   def update?
