@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <%= form_with(model: project, url:_url,  local: true) do |f| %>
+            <% if project.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+                <ul>
+                  <% project.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="form-group">
+              <label>Name:</label>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name" ,class:"form-control" %>
+              <span class="Error"></span>
+            </div>
+            <div class="form-group">
+              <label>Description:</label>
+              <%= f.text_area :description, autofocus: true, autocomplete: "email",class:"form-control" %>
+              <span class="Error"></span>
+            </div>
+            <%= f.submit("Create", class:"btn btn-primary  btn-block")%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

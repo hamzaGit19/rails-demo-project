@@ -4,7 +4,7 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           <h5 class="card-title text-center">Edit client</h5>
-          <%= form_for(@client, url:admin_client_path) do |f| %>
+          <%= form_for(@client, url:manager_client_path) do |f| %>
             <div class="form-group">
               <label>Full Name:</label>
               <%= f.text_field :name, autofocus: true, autocomplete: "Name",class:"form-control" %>

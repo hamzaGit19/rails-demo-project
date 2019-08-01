@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_manager_project_path(@project) %> |
+<%= link_to 'Back', manager_projects_path %>
+
+<%= render 'projects/show', project: @project, _url: manager_project_path %>
