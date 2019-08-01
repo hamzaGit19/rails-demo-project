@@ -16,8 +16,8 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th><Details></th>
+                  <th>Field</th>
+                  <th>Details</th>
                    
                  </tr>
               </thead>
@@ -35,6 +35,10 @@
                   <td><%= @project.name %></td>
                 </tr>
                 <tr>
+                 <tr>
+                  <th>Manager: please move me to other tab</th>
+                  <td><%= get_manager_name(@project.manager_id) %></td>
+                </tr>
                   <th>Client</th>
                   <td><%= @project.name %></td>
                 </tr>
