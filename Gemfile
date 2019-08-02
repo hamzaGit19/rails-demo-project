@@ -47,6 +47,8 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'mini_magick', '~> 4.3'
 gem 'pundit'
+gem 'chosen-rails'
+
 
 # Till here
 
