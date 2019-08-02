@@ -11,7 +11,7 @@ class Manager::ProjectsController < ProjectsController
    def update 
      super 
      respond_to do |format|
-       if @project.update(project_params)
+       if @project.update(project_params.except(:employees))
          format.html { redirect_to manager_projects_path, notice: 'Project was successfully updated.' }
        else
          format.html { render :edit }

@@ -4,8 +4,8 @@
       <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
         <div class="row ">
           <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-            <%if !@user.image.eql? "null"%>
-              <%= image_tag @user.image.thumb.url, class: "rounded-circle"%>
+            <%if @user.image.eql? "null"%>
+              <%# <%= image_tag @user.image.thumb.url, class: "rounded-circle"%> %>
             <%else%>
               <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle">
             <%end%>

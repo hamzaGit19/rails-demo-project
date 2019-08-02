@@ -13,6 +13,9 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require chosen-jquery
+//= require dashboard.coffee
+
 
 //= require rails-ujs
 //= require activestorage

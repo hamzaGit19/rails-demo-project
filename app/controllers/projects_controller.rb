@@ -24,13 +24,17 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
-    @project.creator_id =  current_user.id
+    @project = Project.new(project_params.except(:employees))
+    @project.creator_id = current_user.id
+    employee_ids = get_employee_ids
+    add_employees(employee_ids)
   end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    employee_ids = get_employee_ids
+    add_employees(employee_ids)
   end
 
   # DELETE /projects/1
@@ -40,13 +44,29 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :employees => [])
+  end
+
+  def get_employee_ids 
+    employee_ids = project_params[:employees]
+    employee_ids.delete("")
+    employee_ids
+  end
+
+  def add_employees(employee_ids)
+    employee_ids.each { |e_id|
+      if (!@project.employees.exists?(:id => e_id))
+        @employee = Employee.find(e_id)
+        @project.employees << @employee
+      end
+    }
+  end
 end

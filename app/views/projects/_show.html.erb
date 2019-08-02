@@ -18,8 +18,7 @@
                 <tr>
                   <th>Field</th>
                   <th>Details</th>
-                   
-                 </tr>
+                </tr>
               </thead>
               <tbody>
                 <tr>
@@ -35,34 +34,52 @@
                   <td><%= get_company_name(@project.client_id) %></td>
                 </tr>
                 <tr>
-                 <tr>
-                  <th>Manager: please move me to other tab</th>
-                  <td><%= get_manager_name(@project.manager_id) %></td>
-                </tr>
+                  <tr>
+                    <th>Manager: please move me to other tab</th>
+                    <td><%= get_manager_name(@project.manager_id) %></td>
+                  </tr>
                   <th>Client</th>
                   <td><%= get_client_name(@project.client_id) %></td>
                 </tr>
                 <tr>
                   <th>Cost</th>
-                  <td><%= @project.name %></td>
+                  <td><%= @project.employees.count %></td>
                 </tr>
                 <tr>
                   <th>Date</th>
                   <td><%= @project.created_at %></td>
                 </tr>
-
-                 <tr>
+                <tr>
                   <th>Created by:</th>
                   <td><%= get_creator_name(@project.creator_id) %></td>
                 </tr>
-
-              
               </tbody>
             </table>
           </div>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          HOLAEt et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+          <div class="well">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Designation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th><%= get_manager_name(@project.manager_id) %></th>
+                  <td>Manager</td>
+                </tr>
+                <% get_employees(@project.id).each do |person| %>
+                  <tr>
+                    <th><%= person %></th>
+                    <td>Employee</td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
           Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
@@ -73,6 +90,5 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 </div>
