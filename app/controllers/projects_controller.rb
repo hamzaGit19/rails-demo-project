@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: %i[show edit update destroy]
 
   # GET /projects
   # GET /projects.json
@@ -9,8 +11,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   # GET /projects/1.json
-  def show
-  end
+  def show; end
 
   # GET /projects/new
   def new
@@ -18,8 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /projects
   # POST /projects.json
@@ -52,21 +52,21 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :employees => [])
+    params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :cost, employees: [])
   end
 
-  def get_employee_ids 
+  def get_employee_ids
     employee_ids = project_params[:employees]
-    employee_ids.delete("")
+    employee_ids.delete('')
     employee_ids
   end
 
   def add_employees(employee_ids)
-    employee_ids.each { |e_id|
-      if (!@project.employees.exists?(:id => e_id))
+    employee_ids.each do |e_id|
+      unless @project.employees.exists?(id: e_id)
         @employee = Employee.find(e_id)
         @project.employees << @employee
       end
-    }
+    end
   end
 end

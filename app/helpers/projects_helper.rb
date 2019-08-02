@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectsHelper
   def options_for_managers
     @managers = Manager.all
@@ -28,11 +30,11 @@ module ProjectsHelper
   end
 
   def get_employees(id)
-    employees = []    
+    employees = []
 
-      Employee.joins(:projects).where(projects: {id: id}).find_each do |user|
-          employees<< user.name
-        end
+    Employee.joins(:projects).where(projects: { id: id }).find_each do |user|
+      employees << user.name
+    end
 
     # Employee.where(projects[project_id]: id).find_each do |user|
     #   employees<< user.name

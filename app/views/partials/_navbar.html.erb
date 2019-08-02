@@ -13,8 +13,10 @@
         <%if current_user.admin?%>
           <%= link_to 'Users', dashboard_root_path,class:"table-top-headings"%>
           <%= link_to 'Clients', admin_clients_path,class:"table-top-headings"%>
+          <%= link_to 'Projects', admin_projects_path,class:"table-top-headings"%>
         <%else%>
           <%= link_to 'Clients', manager_clients_path,class:"table-top-headings"%>
+          <%= link_to 'Projects', manager_projects_path,class:"table-top-headings"%>
         <%end%>
       <%end%>
     </ul>

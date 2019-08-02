@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     get 'projects/index'
     get 'projects/show'
   end
-  resources :projects
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # get 'users/new' => 'users/registrations#new'
 
@@ -27,14 +26,17 @@ Rails.application.routes.draw do
     match ':id' => 'users#destroy', :via => :delete, :as => :user_delete
     resources :users
     resources :clients
-    resources :projects
+    resources :projects do
+      resources :payments
+    end
   end
 
   namespace :manager do
     # match ':id' => 'users#destroy', :via => :delete, :as => :user_delete
     resources :clients
-    resources :projects
-
+    resources :projects do
+      resources :payments
+    end
   end
 
   resource :user, controller: 'users' do
