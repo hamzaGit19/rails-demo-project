@@ -32,17 +32,7 @@ class PaymentsController < ApplicationController
 
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json
-  def update
-    # respond_to do |format|
-    #   if @payment.update(payment_params)
-    #     format.html { redirect_to @payment, notice: "Payment was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @payment }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @payment.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
+  def update; end
 
   # DELETE /payments/1
   # DELETE /payments/1.json

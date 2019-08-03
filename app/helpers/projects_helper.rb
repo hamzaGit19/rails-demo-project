@@ -5,11 +5,6 @@ module ProjectsHelper
     @managers = Manager.all
   end
 
-  def get_manager_name(id)
-    @manager = Manager.find(id)
-    @manager.name
-  end
-
   def get_clients
     @clients = Client.all
   end
@@ -24,7 +19,7 @@ module ProjectsHelper
     @client.company
   end
 
-  def get_creator_name(id)
+  def get_user_name(id)
     @user = User.find(id)
     @user.name
   end
@@ -35,10 +30,6 @@ module ProjectsHelper
     Employee.joins(:projects).where(projects: { id: id }).find_each do |user|
       employees << user.name
     end
-
-    # Employee.where(projects[project_id]: id).find_each do |user|
-    #   employees<< user.name
-    # end
     employees
   end
 end

@@ -5,8 +5,8 @@
         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
           <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Overview</a>
           <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Employees</a>
-          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Timelogs</a>
-          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Payments</a>
+          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Payments</a>
+          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Timelogs</a>
           <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Comments</a>
         </div>
       </nav>
@@ -36,7 +36,7 @@
                 <tr>
                   <tr>
                     <th>Manager: please move me to other tab</th>
-                    <td><%= get_manager_name(@project.manager_id) %></td>
+                    <td><%= get_user_name(@project.manager_id) %></td>
                   </tr>
                   <th>Client</th>
                   <td><%= get_client_name(@project.client_id) %></td>
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                   <th>Created by:</th>
-                  <td><%= get_creator_name(@project.creator_id) %></td>
+                  <td><%= get_user_name(@project.creator_id) %></td>
                 </tr>
               </tbody>
             </table>
@@ -72,7 +72,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <th><%= get_manager_name(@project.manager_id) %></th>
+                  <th><%= get_user_name(@project.manager_id) %></th>
                   <td>Manager</td>
                 </tr>
                 <% get_employees(@project.id).each do |person| %>
@@ -86,7 +86,25 @@
           </div>
         </div>
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-          Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+          <div class="well">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Amount</th>
+                  <th>Created By:</th>
+                  <th>Created At:</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% (@project.payments).each do |payment| %>
+                  <tr>
+                    <td><%= payment.amount %></td>
+                    <td><%= get_user_name(payment.creator_id) %></td>
+                    <td><%= payment.created_at %></td>        
+                <%end%>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
           Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.

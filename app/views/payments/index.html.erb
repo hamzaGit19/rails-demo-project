@@ -15,6 +15,7 @@
             <tr>
               <th>Amount</th>
               <th>Created by</th>
+              <th>Created on</th>
               <th>Actions </th>
             </tr>
           </thead>
@@ -22,6 +23,7 @@
             <% @payments.each do |payment| %>
               <tr>
                 <td><%= payment.amount %></td>
+                <td><%= get_user_name(payment.creator_id) %></td>
                 <td><%= payment.created_at %></td>
                 <td>
                   <% if current_user.manager?%>
