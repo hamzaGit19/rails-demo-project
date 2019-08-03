@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_802_103_623) do
+ActiveRecord::Schema.define(version: 20_190_803_202_651) do
   create_table 'clients', force: :cascade do |t|
     t.string 'name', default: '', null: false
     t.string 'company', default: '', null: false
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 20_190_802_103_623) do
     t.float 'cost'
     t.index ['client_id'], name: 'index_projects_on_client_id'
     t.index ['manager_id'], name: 'index_projects_on_manager_id'
+  end
+
+  create_table 'time_logs', force: :cascade do |t|
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'hours', default: 1, null: false
+    t.integer 'creator_id', default: -1, null: false
+    t.integer 'project_id'
+    t.integer 'employee_id', default: -1, null: false
+    t.index ['project_id'], name: 'index_time_logs_on_project_id'
   end
 
   create_table 'users', force: :cascade do |t|

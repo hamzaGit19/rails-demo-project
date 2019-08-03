@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <%= link_to(new_manager_project_time_log_path(@project), class:"btn btn-primary btn-xs pull-left" )do %><i class="fa fa-user"> Create time_log</i> <%end%>
+</div>
+<div class="row">
+  <div class="span7">
+    <div class="widget stacked widget-table action-table">
+      <div class="widget-header">
+        <i class="icon-th-list"></i>
+        <h3>Projects</h3>
+      </div>
+      <!-- /widget-header -->
+      <div class="widget-content">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Hour</th>
+              <th>Employee</th>
+              <th>Created by</th>
+              <th>Created on</th>
+              <th>Actions </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @time_logs.each do |time_log| %>
+              <tr>
+                <td><%= time_log.hours %></td>
+                <td><%= get_user_name(time_log.employee_id) %></td>
+                <td><%= get_user_name(time_log.creator_id) %></td>
+                <td><%= time_log.created_at %></td>
+                <td>
+                  <% if current_user.manager?%>
+                    <%= render 'manager_actions', time_log: time_log, project: @project %>
+                  <%else%>
+                    <%= render 'admin_actions', time_log: time_log, project: @project %>
+                  <%end%>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <!-- /widget-content -->
+    </div>
+    <!-- /widget -->
+  </div>
+</div>
