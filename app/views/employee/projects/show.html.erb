@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+<%= link_to 'Back', url_for(:back), class:"btn btn-secondary pull-right" %>
+</div>
+<%= render 'projects/show', project: @project, _url: edit_employee_project_path %>

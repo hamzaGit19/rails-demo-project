@@ -6,7 +6,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+     if current_user.employee?
+      @projects = current_user.projects 
+    else
+       @projects = Project.all 
+    end
+
   end
 
   # GET /projects/1

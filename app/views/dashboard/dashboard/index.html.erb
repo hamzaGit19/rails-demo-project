@@ -4,8 +4,8 @@
 <% if current_user.type =="Manager"%>
   <%=render "dashboard/dashboard/partials/manager-dashboard"%>
 <%end%>
-<% if current_user.type =="Client"%>
-  This is Client's dashboard
+<% if current_user.type =="Employee"%>
+  <%=render "dashboard/dashboard/partials/employee-dashboard"%>
 <%end%>
 
  
