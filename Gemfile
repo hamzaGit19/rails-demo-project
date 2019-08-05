@@ -40,7 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Adding my own gems from here
 gem 'bootstrap', '~> 4.0.0'
-gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 gem 'chosen-rails'
 gem 'devise'
 gem 'font-awesome-rails'

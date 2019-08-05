@@ -1,0 +1,5 @@
+class AddFilesToProjects < ActiveRecord::Migration[5.2]
+  def change
+    add_column :projects, :files, :string
+  end
+end

@@ -7,7 +7,7 @@
           <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Employees</a>
           <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Payments</a>
           <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Timelogs</a>
-          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Comments</a>
+          <a class="nav-item nav-link" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab" aria-controls="nav-files" aria-selected="false">Files</a>
         </div>
       </nav>
       <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -34,10 +34,6 @@
                   <td><%= get_company_name(@project.client_id) %></td>
                 </tr>
                 <tr>
-                  <tr>
-                    <th>Manager: please move me to other tab</th>
-                    <td><%= get_user_name(@project.manager_id) %></td>
-                  </tr>
                   <th>Client</th>
                   <td><%= get_client_name(@project.client_id) %></td>
                 </tr>
@@ -96,21 +92,68 @@
                 </tr>
               </thead>
               <tbody>
+                <% @total_amount = 0%>
                 <% (@project.payments).each do |payment| %>
+                  <% @total_amount = @total_amount + payment.amount%>
                   <tr>
                     <td><%= payment.amount %></td>
                     <td><%= get_user_name(payment.creator_id) %></td>
-                    <td><%= payment.created_at %></td>        
-                <%end%>
-              </tbody>
-            </table>
+                    <td><%= payment.created_at %></td>
+                  <%end%>
+                  <tr>Total:<%=@total_amount%> </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-          Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
+          <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+            <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Hour(s)</th>
+                    <th>Employee</th>
+                    <th>Created By:</th>
+                    <th>Logged At:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @total_hours = 0%>
+                  <% @project.time_logs.each do |time_log| %>
+                    <% @total_hours = @total_hours + time_log.hours%>
+                    <tr>
+                      <td><%= time_log.hours %></td>
+                      <td><%= get_user_name(time_log.employee_id) %></td>
+                      <td><%= get_user_name(time_log.creator_id) %></td>
+                      <td><%= time_log.created_at %></td>
+                    </tr>
+                  <% end %>
+                  <tr>Total:<%=@total_hours%> </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+             <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
+            <div class="well">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>File</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @project.files.each do |file| %>
+                    <tr>
+                      <td><%= link_to(file) %></td>
+                    </tr>
+                  <% end %>
+      
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
