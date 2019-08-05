@@ -34,6 +34,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1.json
   def update
     employee_ids = get_employee_ids
+    @project.employees.delete(@project.employees)
     add_employees(employee_ids)
   end
 
@@ -52,12 +53,12 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :cost, employees: [],files: [] )
+    params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :cost, employees: [], files: [])
   end
 
   def get_employee_ids
     employee_ids = project_params[:employees]
-    employee_ids.delete('')
+    employee_ids.delete("")
     employee_ids
   end
 

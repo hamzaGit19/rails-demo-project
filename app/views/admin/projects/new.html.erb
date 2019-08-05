@@ -1,2 +1,3 @@
-This is admin's project create
-<%= render 'projects/form', project: @project, _url: admin_projects_path %>
+<div class="row">
+<%= link_to 'Back', url_for(:back), class:"btn btn-secondary pull-right" %>
+</div><%= render 'projects/form', project: @project, _url: admin_projects_path %>

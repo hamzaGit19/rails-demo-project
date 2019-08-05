@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
   <%= link_to(new_manager_project_time_log_path(@project), class:"btn btn-primary btn-xs pull-left" )do %><i class="fa fa-user"> Create time_log</i> <%end%>
+<div class="row">
+<%= link_to 'Back', url_for(:back), class:"btn btn-secondary pull-right" %>
+</div>
 </div>
 <div class="row">
   <div class="span7">

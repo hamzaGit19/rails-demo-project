@@ -1,5 +1,7 @@
-<h1>New Time Log</h1>
+<div class="row">
+<%= link_to 'Back', url_for(:back), class:"btn btn-secondary pull-right" %>
+</div>
 
 <%= render 'form', time_log: @time_log %>
 
-<%= link_to 'Back', time_logs_path %>
+ 

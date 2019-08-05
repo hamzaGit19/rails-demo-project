@@ -1,1 +1,4 @@
+<div class="row">
+<%= link_to 'Back', url_for(:back), class:"btn btn-secondary pull-right" %>
+</div>
 <%= render 'payments/edit-form', project: @project, _url: manager_project_payment_path(@project) %>

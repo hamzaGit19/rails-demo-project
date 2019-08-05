@@ -29,7 +29,7 @@
               <label>Employees:</label>
               <%= f.select :employees,
                Employee.all.map { |employee| [employee.name, employee.id] },
-               { include_blank: true },
+               { include_blank: true, :selected => @project.employees.pluck(:id) },
                { multiple:true,class: 'chosen-select' }
             %></div>
             <div class="form-group">

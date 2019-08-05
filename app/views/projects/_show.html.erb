@@ -84,6 +84,13 @@
         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
           <div class="well">
             <table class="table">
+              <% if current_user.admin? 
+               _payment_url = admin_project_payments_path(@project) 
+               else 
+                _payment_url = manager_project_payments_path(@project)  
+                end
+                %>
+              <span><%= render 'payment_modal', project: @project, _url: _payment_url %> </span>
               <thead>
                 <tr>
                   <th>Amount</th>
@@ -100,7 +107,7 @@
                     <td><%= get_user_name(payment.creator_id) %></td>
                     <td><%= payment.created_at %></td>
                   <%end%>
-                  <tr>Total:<%=@total_amount%> </tr>
+                  <tr>Total:<%=@total_amount%>  </tr>
                 </tbody>
               </table>
             </div>
@@ -108,6 +115,13 @@
           <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
             <div class="well">
               <table class="table">
+                   <% if current_user.admin? 
+               _time_url = admin_project_time_logs_path(@project) 
+               else 
+                _time_url = manager_project_time_logs_path(@project)  
+                end
+                %>
+              <span><%= render 'timelog_modal', project: @project, _url: _time_url %> </span>
                 <thead>
                   <tr>
                     <th>Hour(s)</th>
@@ -132,13 +146,12 @@
               </table>
             </div>
           </div>
-
-             <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
+          <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
             <div class="well">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>File</th> 
+                    <th>File</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -147,7 +160,6 @@
                       <td><%= link_to(file) %></td>
                     </tr>
                   <% end %>
-      
                 </tbody>
               </table>
             </div>
