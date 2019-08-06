@@ -1,9 +1,9 @@
 <div class="">
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form">
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form3">
     New payment
   </button>
 </div>
-<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="form3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -12,7 +12,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <%= form_with(model: Payment, url:_url,  local: true) do |f| %>
+      <%= form_with(model: Payment, url:_url,  remote: true) do |f| %>
         <div class="modal-body">
           <div class="form-group">
             <label>Cost:</label>

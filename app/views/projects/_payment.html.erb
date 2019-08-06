@@ -1,0 +1,24 @@
+ 
+<table class="table " id ="payment"> 
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Created By:</th>
+      <th>Created At:</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @total_amount = 0%>
+    <% (@project.payments).each do |payment| %>
+      <% @total_amount = @total_amount + payment.amount%>
+      <tr>
+        <td><%= payment.amount %></td>
+        <td><%= get_user_name(payment.creator_id) %></td>
+        <td><%= payment.created_at %></td>
+        <td> <%=link_to(project_payment_path_path(@project,payment), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-eye"></i> <%end%> </td>
+      </tr>
+    <%end%>
+    <tr>Total:<%=@total_amount%>  </tr>
+  </tbody>
+</table>

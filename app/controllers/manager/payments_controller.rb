@@ -20,6 +20,7 @@ class Manager::PaymentsController < PaymentsController
     super
     respond_to do |format|
       if @payment.save
+        format.js
         format.html { redirect_to manager_project_payments_path(@project), notice: 'Payment was successfully created.' }
       else
         format.html { render :new }

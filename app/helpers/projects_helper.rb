@@ -42,4 +42,14 @@ module ProjectsHelper
       _time_url = employee_project_time_logs_path(@project)
     end
   end
+
+  def get_payment_url(current_user)
+    if current_user.admin?
+      _payment_url = admin_project_payments_path(@project)
+    elsif current_user.manager?
+      _payment_url = manager_project_payments_path(@project)
+    else
+      _payment_url = ""
+    end
+  end
 end

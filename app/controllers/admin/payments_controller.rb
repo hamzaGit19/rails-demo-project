@@ -24,10 +24,12 @@ class Admin::PaymentsController < PaymentsController
     end
   end
 
+
   def create
-    super
+     super
     respond_to do |format|
       if @payment.save
+        format.js
         format.html { redirect_to admin_project_payments_path(@project), notice: 'Payment was successfully created.' }
       else
         format.html { render :new }
