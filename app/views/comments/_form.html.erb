@@ -1,13 +1,17 @@
-<div class="comments">
+<div class=" comments">
   <div class="comment-wrap">
     <div class="photo">
-      <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+      <% if current_user.image? %>
+        <%= image_tag current_user.image.thumb.url, class: "rounded-circle", width:"50", height:"50"%>
+      <% else %>
+        <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+      <% end %>
     </div>
     <div class="comment-block">
       <%= form_with(model: @comment, url: comments_url(resource: resource, resource_id: resource_id)) do |f| %>
-        <%= f.text_area :content, rows: 8, required:true %>
+        <%= f.text_area :content, rows: 8, required:true, placeholder: "Write a comment here.." %>
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit("Create", class:"btn btn-primary  ")%>
         </div>
       <% end %>
     </div>
@@ -15,17 +19,20 @@
   <% object_.comments.each do |comment| %>
     <div class="comment-wrap">
       <div class="photo">
-        <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
-      </div>
-      <div class="comment-block">
-        <p class="comment-text"><%= comment.content %></p>
-        <div class="bottom-comment">
-          <div class="comment-date"><%= comment.created_at%>\t</div>
-          
-          <div class="comment-date"> By:<%= get_user_name(comment.creator_id)%></div>
-
+        <% @u=User.find(comment.creator_id) %>
+          <%if @u.image?%>
+            <%= image_tag @u.image.thumb.url, class: "rounded-circle", width:"50", height:"50"%>
+          <% else %>
+            <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+          <% end %>
+        </div>
+        <div class="comment-block">
+          <p class="comment-text"><%= comment.content %></p>
+          <div class="bottom-comment">
+            <div class="comment-date"><%= comment.created_at%>\t</div>
+            <div class="comment-date"> By:<%= get_user_name(comment.creator_id)%></div>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
