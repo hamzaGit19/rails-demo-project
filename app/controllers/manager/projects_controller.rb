@@ -21,9 +21,8 @@ class Manager::ProjectsController < ProjectsController
     end
   end
 
-
-
   def show
     super
+    render 'projects/show', project: @project, _url: manager_project_path 
   end
 end

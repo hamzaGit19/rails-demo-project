@@ -42,7 +42,7 @@ class PaymentsController < ApplicationController
     authorize User, :is_admin?, policy_class: PaymentPolicy
     @payment.destroy
     respond_to do |format|
-      format.html { redirect_to payments_url, notice: "Payment was successfully destroyed." }
+      format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

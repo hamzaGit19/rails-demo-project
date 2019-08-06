@@ -111,7 +111,7 @@
                     <td><%= payment.amount %></td>
                     <td><%= get_user_name(payment.creator_id) %></td>
                     <td><%= payment.created_at %></td>
-                    <td> <%=link_to(project_payment_path_path(@project,payment), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-user"></i> <%end%> </td>
+                    <td> <%=link_to(project_payment_path_path(@project,payment), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-eye"></i> <%end%> </td>
                   <%end%>
                   <tr>Total:<%=@total_amount%>  </tr>
                 </tbody>
@@ -120,42 +120,9 @@
           </div>
           <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
             <div class="well">
-              <table class="table">
-                <% if current_user.admin? 
-               _time_url = admin_project_time_logs_path(@project) 
-               elsif current_user.manager? 
-                _time_url = manager_project_time_logs_path(@project)  
-
-                else 
-                _time_url = employee_project_time_logs_path(@project)  
-
-                end
-                %>
-                <span><%= render 'timelog_modal', project: @project, _url: _time_url %> </span>
-                <thead>
-                  <tr>
-                    <th>Hour(s)</th>
-                    <th>Employee</th>
-                    <th>Created By:</th>
-                    <th>Logged At:</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @total_hours = 0%>
-                  <% @project.time_logs.each do |time_log| %>
-                    <% @total_hours = @total_hours + time_log.hours%>
-                    <tr>
-                      <td><%= time_log.hours %></td>
-                      <td><%= get_user_name(time_log.employee_id) %></td>
-                      <td><%= get_user_name(time_log.creator_id) %></td>
-                      <td><%= time_log.created_at %></td>
-                      <td> <%=link_to(project_time_log_path_path(@project,time_log), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-user"></i> <%end%> </td>
-                    </tr>
-                  <% end %>
-                  <tr>Total:<%=@total_hours%> </tr>
-                </tbody>
-              </table>
+              <% _time_url = get_time_url(current_user) %>
+              <%= render 'timelog', project: @project%>
+              <%= render 'timelog_modal', project: @project, _url: _time_url %> 
             </div>
           </div>
           <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
@@ -169,7 +136,7 @@
                 <tbody>
                   <% @project.files.each do |file| %>
                     <tr>
-                      <td><%= link_to(file) %></td>
+                      <td><%= link_to file.url, download:"" %></td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -177,7 +144,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
-            <div class="well">Hello world
+            <div class="well">
               <span><%= render 'comments/form', resource: "Project", resource_id: @project.id, object_: @project %> </span>
             </div>
           </div>

@@ -28,6 +28,7 @@ class Admin::TimeLogsController < TimeLogsController
     super
     respond_to do |format|
       if @time_log.save
+        format.js
         format.html { redirect_to admin_project_time_logs_path(@project), notice: 'time_log was successfully created.' }
       else
         format.html { render :new }

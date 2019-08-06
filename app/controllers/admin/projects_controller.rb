@@ -30,5 +30,7 @@ class Admin::ProjectsController < ProjectsController
 
   def show
     super
+    render 'projects/show', project: @project, _url: admin_project_path 
+
   end
 end

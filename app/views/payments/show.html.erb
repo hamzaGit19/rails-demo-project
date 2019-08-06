@@ -1,26 +1,51 @@
-<p id="notice"><%= notice %></p>
-SHOW PAGE
-<div class="comments">
-  <div class="card">
-    <div class="container-fliud">
-      <div class="wrapper row">
-        <div class="preview col-md-12">
-          <ul class="preview-pic tab-content">
-            <h3 class="product-title"><%=@project.name%></h3>
-          </ul>
+ 
+<div class=" ">
+  <div class="row">
+    <div class="col-xs-12 ">
+      <nav>
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Overview</a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Comments</a>
         </div>
-        <div class="details col-md-6">
-          <h3 class="product-title">Payment details</h3>
-          <div class="rating">
-            <span class="review-no"><%=@payment.comments.count%> comments</span>
+      </nav>
+      <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <div class="well">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Project Name</th>
+                  <td><%= @project.name%></td>
+                </tr>
+                <tr>
+                  <th>Description</th>
+                  <td><%= @project.description %></td>
+                </tr>
+                <tr>
+                  <th>Amount</th>
+                  <td><%= @payment.amount %></td>
+                </tr>
+                <tr>
+                  <th>Created by</th>
+                  <td><%= get_user_name(@payment.creator_id) %></td>
+                </tr>
+               
+              </tbody>
+            </table>
           </div>
-          <p class="product-description">This time log was created by: <%=get_user_name(@payment.creator_id)%>.</p>
-          <h4 class="price">Amount: <span><%= @payment.amount%></span></h4>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div class="well">
+            <span><%= render 'comments/form', resource: "Payment", resource_id: @payment.id, object_: @payment %> </span>
+          </div>
         </div>
       </div>
     </div>
-    
   </div>
-
 </div>
-  <span><%= render 'comments/form', resource: "Payment", resource_id: @payment.id, object_: @payment %> </span>

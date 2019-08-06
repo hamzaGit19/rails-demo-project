@@ -32,4 +32,14 @@ module ProjectsHelper
     end
     employees
   end
+
+  def get_time_url(current_user)
+    if current_user.admin?
+      _time_url = admin_project_time_logs_path(@project)
+    elsif current_user.manager?
+      _time_url = manager_project_time_logs_path(@project)
+    else
+      _time_url = employee_project_time_logs_path(@project)
+    end
+  end
 end

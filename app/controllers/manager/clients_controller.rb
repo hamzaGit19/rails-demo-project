@@ -23,8 +23,6 @@ class Manager::ClientsController < ManagerBaseController
     end
   end
 
-
-
   def create
     @client = Client.new(create_params)
     respond_to do |format|

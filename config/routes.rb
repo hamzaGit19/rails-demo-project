@@ -57,6 +57,8 @@ Rails.application.routes.draw do
       patch 'update_password'
     end
   end
+  get '*path', controller: 'application', action: 'page_not_found'
+
   #   # get '*path' => redirect('/')
   #   if Rails.env.development?
   #     get '404', to: 'application#page_not_found'

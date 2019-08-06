@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <%= link_to(new_admin_project_path, class:"btn btn-primary btn-xs pull-left" )do %><i class="fa fa-user"> Create project</i> <%end%>
+  <%= link_to(new_admin_project_path, class:"btn btn-primary btn-xs pull-left" )do %><i class="fa fa-eye"> Create project</i> <%end%>
 </div>
 
 <div class="row">
@@ -25,7 +25,7 @@
                 <td><%= project.name %></td>
                 <td><%= project.description %></td>
                 <td>
-                  <span> <%=link_to(admin_project_path(project), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-user"></i> <%end%> </span>
+                  <span> <%=link_to(admin_project_path(project), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-eye"></i> <%end%> </span>
                   <span> <%=link_to(edit_admin_project_path(project), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-edit"></i> <%end%> </span>
 
                   <span> <%= link_to('Delete',admin_project_path(project), method: :delete, data:{confirm: "are you sure?"} ,class:"btn btn-warning btn-xs glyphicon glyphicon-edit")%></span>
