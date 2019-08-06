@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'projects/:project_id/time_logs/:id', to: 'time_logs#show', as: 'project_time_log_path'
+  get 'projects/:project_id/payments/:id', to: 'payments#show', as: 'project_payment_path'
+
   namespace :admin do
     get 'projects/index'
     get 'projects/show'
@@ -40,6 +43,13 @@ Rails.application.routes.draw do
       resources :time_logs
     end
   end
+  namespace :employee do
+    resources :clients, only: %i[index show]
+    resources :projects do
+      resources :time_logs
+    end
+  end
+  resources:comments
 
   resource :user, controller: 'users' do
     collection do

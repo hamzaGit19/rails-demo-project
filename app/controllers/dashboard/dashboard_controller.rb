@@ -16,8 +16,6 @@ class Dashboard::DashboardController < ApplicationController
     end
     @users = query.all
     @users = @users.page(params[:page])
-    
-
   end
 
   def search_params

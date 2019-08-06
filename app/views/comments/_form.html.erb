@@ -1,19 +1,31 @@
-<%= form_for [Comment.new, manager_project_comments_path] do |f| %>
-  <% if @comment.errors.any? %>
-    <div class="error_messages">
-      <h2>Please correct the following errors.</h2>
-      <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="comments">
+  <div class="comment-wrap">
+    <div class="photo">
+      <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+    </div>
+    <div class="comment-block">
+      <%= form_with(model: @comment, url: comments_url(resource: resource, resource_id: resource_id)) do |f| %>
+        <%= f.text_area :content, rows: 8, required:true %>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
       <% end %>
-      </ul>
+    </div>
+  </div>
+  <% object_.comments.each do |comment| %>
+    <div class="comment-wrap">
+      <div class="photo">
+        <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+      </div>
+      <div class="comment-block">
+        <p class="comment-text"><%= comment.content %></p>
+        <div class="bottom-comment">
+          <div class="comment-date"><%= comment.created_at%>\t</div>
+          
+          <div class="comment-date"> By:<%= get_user_name(comment.creator_id)%></div>
+
+        </div>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.text_area :content, rows: 8 %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

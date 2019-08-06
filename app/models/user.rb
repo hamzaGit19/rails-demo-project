@@ -22,6 +22,10 @@ class User < ApplicationRecord
     instance_of?(Client)
   end
 
+  def employee?
+    instance_of?(Employee)
+  end
+
   def image?
     if image.eql? 'null'
       false

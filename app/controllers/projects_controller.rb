@@ -6,12 +6,11 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-     if current_user.employee?
-      @projects = current_user.projects 
-    else
-       @projects = Project.all 
-    end
-
+    @projects = if current_user.employee?
+                  current_user.projects
+                else
+                  Project.all
+               end
   end
 
   # GET /projects/1
@@ -63,7 +62,7 @@ class ProjectsController < ApplicationController
 
   def get_employee_ids
     employee_ids = project_params[:employees]
-    employee_ids.delete("")
+    employee_ids.delete('')
     employee_ids
   end
 

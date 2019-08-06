@@ -1,2 +1,26 @@
-<h1>Payments#show</h1>
-<p>Find me in app/views/payments/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+SHOW PAGE
+<div class="comments">
+  <div class="card">
+    <div class="container-fliud">
+      <div class="wrapper row">
+        <div class="preview col-md-12">
+          <ul class="preview-pic tab-content">
+            <h3 class="product-title"><%=@project.name%></h3>
+          </ul>
+        </div>
+        <div class="details col-md-6">
+          <h3 class="product-title">Payment details</h3>
+          <div class="rating">
+            <span class="review-no"><%=@payment.comments.count%> comments</span>
+          </div>
+          <p class="product-description">This time log was created by: <%=get_user_name(@payment.creator_id)%>.</p>
+          <h4 class="price">Amount: <span><%= @payment.amount%></span></h4>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+  <span><%= render 'comments/form', resource: "Payment", resource_id: @payment.id, object_: @payment %> </span>
