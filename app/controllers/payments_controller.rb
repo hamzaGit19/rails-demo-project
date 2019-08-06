@@ -25,6 +25,8 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
+    authorize User, :is_allowed?, policy_class: PaymentPolicy
+
     @payment = Payment.new(payment_params)
     @payment.project_id = @project.id
     @payment.creator_id = current_user.id
@@ -37,9 +39,10 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1
   # DELETE /payments/1.json
   def destroy
+    authorize User, :is_admin?, policy_class: PaymentPolicy
     @payment.destroy
     respond_to do |format|
-      format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }
+      format.html { redirect_to payments_url, notice: "Payment was successfully destroyed." }
       format.json { head :no_content }
     end
   end

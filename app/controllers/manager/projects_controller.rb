@@ -21,12 +21,7 @@ class Manager::ProjectsController < ProjectsController
     end
   end
 
-  def destroy
-    super
-    respond_to do |format|
-      format.html { redirect_to manager_projects_path, notice: 'Project was successfully destroyed.' }
-    end
-  end
+
 
   def show
     super

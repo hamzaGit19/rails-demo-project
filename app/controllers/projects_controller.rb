@@ -45,6 +45,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    authorize User, :is_admin?, policy_class: ProjectPolicy
     @project.destroy
   end
 

@@ -25,6 +25,7 @@ class TimeLogsController < ApplicationController
   # POST /time_logs
   # POST /time_logs.json
   def create
+    byebug
     @time_log = TimeLog.new(time_log_params)
     @time_log.project_id = @project.id
     @time_log.creator_id = current_user.id

@@ -23,10 +23,7 @@ class Manager::ClientsController < ManagerBaseController
     end
   end
 
-  def destroy
-    @client.destroy
-    redirect_to admin_clients_path, notice: 'Client deleted.'
-  end
+
 
   def create
     @client = Client.new(create_params)
