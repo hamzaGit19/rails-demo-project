@@ -1,6 +1,4 @@
-  
 <table class="table" id="timelog">
-
   <thead>
     <tr>
       <th>Hour(s)</th>
@@ -12,7 +10,8 @@
   </thead>
   <tbody>
     <% @total_hours = 0%>
-    <% project.time_logs.each do |time_log| %>
+    <%@time_logs = @project.time_logs.order(:created_at).page(params[:page])%>
+    <% @time_logs.each do |time_log| %>
       <% @total_hours = @total_hours + time_log.hours%>
       <tr>
         <td><%= time_log.hours %></td>
@@ -24,4 +23,7 @@
     <% end %>
     <tr>Total:<%=@total_hours%> </tr>
   </tbody>
+  <div id="paginator">
+  <%= paginate @time_logs  %>
+  </div>
 </table>

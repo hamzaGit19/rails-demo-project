@@ -1,5 +1,5 @@
 $('#form2').modal('hide');
-
- <% @project = @time_log.project %>
+<% @project = @time_log.project %>
 $('#timelog').empty();
+$('#paginator').empty();
 $('#timelog').append("<%= j render 'projects/timelog', project: @project %>");

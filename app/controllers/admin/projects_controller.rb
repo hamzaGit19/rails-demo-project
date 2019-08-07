@@ -13,7 +13,7 @@ class Admin::ProjectsController < ProjectsController
   def update
     super
     respond_to do |format|
-      if @project.update(project_params)
+      if @project.update(project_params.except(:employees))
         format.html { redirect_to admin_projects_index_path, notice: 'Project was successfully updated.' }
       else
         format.html { render :edit }
@@ -29,8 +29,14 @@ class Admin::ProjectsController < ProjectsController
   end
 
   def show
-    super
-    render 'projects/show', project: @project, _url: admin_project_path 
-
+    respond_to do |format|
+      format.html { render 'projects/show', project: @project, _url: admin_project_path }
+      format.pdf do
+        render pdf: 'Your_filename',
+               template: 'projects/show.html.erb',
+               layout: 'pdf.html'
+      end
+    end
   end
 end
+#     render 'projects/show', project: @project, _url: admin_project_path

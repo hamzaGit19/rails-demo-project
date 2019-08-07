@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :load_commentable
-
+  before_action :load_commentable, only: %i[show edit update create]
+  before_action :set_comment, only: %i[edit update destroy]
   def index
     @comments = @commentable.comments
   end
@@ -12,18 +12,22 @@ class CommentsController < ApplicationController
   end
 
   def create
-      
     @comment = @commentable.comments.new(comments_params)
     @comment.creator_id = current_user.id
 
     respond_to do |format|
       if @comment.save
         format.js
-        format.html { redirect_to session.delete(:return_to), notice: "Comment created" }
+        format.html { redirect_to session.delete(:return_to), notice: 'Comment created' }
       else
         format.html { render :new }
       end
     end
+  end
+
+  def destroy
+    @_comment.destroy
+    redirect_to session.delete(:return_to), notice: 'Comment Deleted'
   end
 
   def load_commentable
@@ -31,6 +35,11 @@ class CommentsController < ApplicationController
     @id = params[:resource_id]
     @commentable = @resource.singularize.classify.constantize.find(@id)
 
+    session[:return_to] ||= request.referer
+  end
+
+  def set_comment
+    @_comment = Comment.find(params[:id])
     session[:return_to] ||= request.referer
   end
 

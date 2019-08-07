@@ -24,9 +24,8 @@ class Admin::PaymentsController < PaymentsController
     end
   end
 
-
   def create
-     super
+    super
     respond_to do |format|
       if @payment.save
         format.js

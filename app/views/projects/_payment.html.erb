@@ -1,5 +1,4 @@
- 
-<table class="table " id ="payment"> 
+<table class="table" id ="payment">
   <thead>
     <tr>
       <th>Amount</th>
@@ -10,7 +9,8 @@
   </thead>
   <tbody>
     <% @total_amount = 0%>
-    <% (@project.payments).each do |payment| %>
+    <%@payments = @project.payments.order(:created_at).page(params[:page])%>
+    <% (@payments).each do |payment| %>
       <% @total_amount = @total_amount + payment.amount%>
       <tr>
         <td><%= payment.amount %></td>
@@ -21,4 +21,7 @@
     <%end%>
     <tr>Total:<%=@total_amount%>  </tr>
   </tbody>
+  <div id="paginator">
+  <%= paginate @payments  %>
+  </div>
 </table>

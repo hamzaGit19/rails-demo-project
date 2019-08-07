@@ -15,7 +15,14 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   # GET /projects/1.json
-  def show; end
+  def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'file_name' # Excluding ".pdf" extension.
+      end
+    end
+  end
 
   # GET /projects/new
   def new
@@ -37,8 +44,9 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    employee_ids = get_employee_ids
     @project.employees.delete(@project.employees)
+    employee_ids = get_employee_ids
+
     add_employees(employee_ids)
   end
 
