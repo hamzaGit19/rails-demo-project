@@ -16,6 +16,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    authorize @project, :is_allowed?, policy_class: ProjectPolicy
+
     respond_to do |format|
       format.html
       format.pdf do

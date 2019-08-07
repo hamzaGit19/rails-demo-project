@@ -17,8 +17,6 @@
           <div class="comment-date"> By:<%= get_user_name(comment.creator_id)%></div>
           <%if comment.creator_id == current_user.id%>
           <span> <%= link_to('Delete',comment_path(comment), method: :delete, data:{confirm: "are you sure?"} ,class:"btn btn-warning btn-xs glyphicon glyphicon-edit pull-right")%></span>
-                    <span> <%= link_to('Delete',comment_path(comment), method: :delete, data:{confirm: "are you sure?"} ,class:"btn btn-warning btn-xs glyphicon glyphicon-edit pull-right")%></span>
-
           <%end%>
         </div>
       </div>

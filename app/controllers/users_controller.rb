@@ -9,7 +9,10 @@ class UsersController < ApplicationController
 
   def show; end
 
-  def new; end
+  def new
+    authorize User, :is_allowed?, policy_class: UserPolicy
+
+  end
 
   def update
     if @user.update(user_params)
@@ -21,6 +24,8 @@ class UsersController < ApplicationController
   end
 
   def add_user
+    authorize User, :is_allowed?, policy_class: UserPolicy
+
     @user = User.new(user_params2)
     redirect_to root_path if @user.save!
   end
