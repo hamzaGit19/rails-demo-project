@@ -1,0 +1,4 @@
+ 
+<% @object_ = @commentable %>
+$('#comments-all').empty();
+$('#comments-all').append("<%= j render 'comments/all_comments', object_: @object_ %>");

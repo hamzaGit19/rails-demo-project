@@ -1,0 +1,23 @@
+ <div id="comments-all">
+  <% @comments = object_.comments.order(:created_at).page(params[:page]) %>
+  <% object_.comments.each do |comment| %>
+    <div class="comment-wrap">
+      <div class="photo">
+        <% @u=User.find(comment.creator_id) %>
+        <%if @u.image?%>
+          <%= image_tag @u.image.thumb.url, class: "rounded-circle", width:"50", height:"50"%>
+        <% else %>
+          <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+        <% end %>
+      </div>
+      <div class="comment-block">
+        <p class="comment-text"><%= comment.content %></p>
+        <div class="bottom-comment">
+          <div class="comment-date"><%= comment.created_at%>\t</div>
+          <div class="comment-date"> By:<%= get_user_name(comment.creator_id)%></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate @comments %>
+</div>

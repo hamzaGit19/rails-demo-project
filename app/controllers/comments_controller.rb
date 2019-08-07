@@ -12,21 +12,24 @@ class CommentsController < ApplicationController
   end
 
   def create
-    # byebug
+      
     @comment = @commentable.comments.new(comments_params)
     @comment.creator_id = current_user.id
 
-    if @comment.save
-      redirect_to session.delete(:return_to), notice: 'Comment created'
-    else
-      render :new
+    respond_to do |format|
+      if @comment.save
+        format.js
+        format.html { redirect_to session.delete(:return_to), notice: "Comment created" }
+      else
+        format.html { render :new }
+      end
     end
   end
 
   def load_commentable
-    resource = params[:resource]
-    id = params[:resource_id]
-    @commentable = resource.singularize.classify.constantize.find(id)
+    @resource = params[:resource]
+    @id = params[:resource_id]
+    @commentable = @resource.singularize.classify.constantize.find(@id)
 
     session[:return_to] ||= request.referer
   end
