@@ -19,8 +19,7 @@ class AdminPolicy < ApplicationPolicy
   end
 
   def destroy?
-    # Bug in Admin.count line
-    if @record.admin?
+     if @record.admin?
       # @counter = Admin.size
       return false if Admin.count == 1
     else

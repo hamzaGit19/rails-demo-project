@@ -10,7 +10,6 @@ class Dashboard::DashboardController < ApplicationController
               User.all.where("id NOT IN(?)", current_user.id)
              end
     if current_user.admin?
-      # Do nothing as per now. Get all the users.
     elsif current_user.manager?
       query = query.managerUsers
     end

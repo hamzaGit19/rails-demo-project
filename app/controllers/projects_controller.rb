@@ -2,15 +2,21 @@
 
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show index]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = if current_user.employee?
-                  current_user.projects
+    @projects = if params[:title]
+                  params.merge!(role: current_user.type, user_id: current_user.id)
+                  Project.apply_filters(params)
                 else
-                  Project.all
-               end
+                  if current_user.employee?
+                    @projects = @user.projects
+                  elsif current_user.manager?
+                    @projects = Project.all
+                  end
+                end
   end
 
   # GET /projects/1
@@ -21,7 +27,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'file_name' # Excluding ".pdf" extension.
+        render pdf: "file_name" # Excluding ".pdf" extension.
       end
     end
   end
@@ -63,9 +69,15 @@ class ProjectsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_project
-    @project = Project.find(params[:id])
+    if Project.exists?(id: params[:id])
+      @project = Project.find(params[:id])
+    else
+      redirect_to dashboard_root_path, notice: "Project does not exist."
+    end
   end
-
+  def set_user
+    @user = User.find(current_user.id)
+  end
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
     params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :cost, employees: [], files: [])
@@ -73,7 +85,7 @@ class ProjectsController < ApplicationController
 
   def get_employee_ids
     employee_ids = project_params[:employees]
-    employee_ids.delete('')
+    employee_ids.delete("")
     employee_ids
   end
 

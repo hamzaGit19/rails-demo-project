@@ -9,10 +9,8 @@
     </tr>
   </thead>
   <tbody>
-    <% @total_hours = 0%>
     <%@time_logs = @project.time_logs.order(:created_at).page(params[:page])%>
     <% @time_logs.each do |time_log| %>
-      <% @total_hours = @total_hours + time_log.hours%>
       <tr>
         <td><%= time_log.hours %></td>
         <td><%= get_user_name(time_log.employee_id) %></td>
@@ -21,9 +19,10 @@
         <td> <%=link_to(project_time_log_path_path(project,time_log), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-eye"></i> <%end%> </td>
       </tr>
     <% end %>
-    <tr>Total:<%=@total_hours%> </tr>
+    <div id="total_hours">
+      Total:<%=total_hours(@project)%>
+      <%= paginate @time_logs  %>
+    </div>
   </tbody>
-  <div id="paginator">
-  <%= paginate @time_logs  %>
-  </div>
+
 </table>

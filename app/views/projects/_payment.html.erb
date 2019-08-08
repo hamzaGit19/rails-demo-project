@@ -8,10 +8,8 @@
     </tr>
   </thead>
   <tbody>
-    <% @total_amount = 0%>
     <%@payments = @project.payments.order(:created_at).page(params[:page])%>
-    <% (@payments).each do |payment| %>
-      <% @total_amount = @total_amount + payment.amount%>
+    <% (@payments).each do |payment| %>      
       <tr>
         <td><%= payment.amount %></td>
         <td><%= get_user_name(payment.creator_id) %></td>
@@ -19,9 +17,9 @@
         <td> <%=link_to(project_payment_path_path(@project,payment), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-eye"></i> <%end%> </td>
       </tr>
     <%end%>
-    <tr>Total:<%=@total_amount%>  </tr>
+    <div id="total_payment">
+      Total:<%=total_payments(@project)%>
+      <%= paginate @payments  %>
+    </div>
   </tbody>
-  <div id="paginator">
-  <%= paginate @payments  %>
-  </div>
 </table>

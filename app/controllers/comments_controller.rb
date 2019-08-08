@@ -39,8 +39,12 @@ class CommentsController < ApplicationController
   end
 
   def set_comment
-    @_comment = Comment.find(params[:id])
-    session[:return_to] ||= request.referer
+    if Comment.exists?(id: params[:id])
+      @_comment = Comment.find(params[:id])
+    else
+      redirect_to dashboard_root_path, notice: "Comment does not exist."
+    end
+     session[:return_to] ||= request.referer
   end
 
   def comments_params

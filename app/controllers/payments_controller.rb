@@ -60,6 +60,10 @@ class PaymentsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
-  end
+    if Project.exists?(id: params[:project_id])
+      @project = Project.find(params[:project_id])
+    else
+      redirect_to dashboard_root_path, notice: "Comment does not exist."
+    end
+   end
 end

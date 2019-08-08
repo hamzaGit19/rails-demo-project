@@ -43,7 +43,7 @@
               <%= f.text_field :referred_by, autofocus: true, autocomplete: "Referred by(Company,person)",class:"form-control" %>
               <span class="Error"></span>
             </div>
-            <% if current_page?(:controller => 'admin/clients', :action => 'new') %>
+            <% if current_page?(controller: 'admin/clients', action: 'new') %>
               <%= f.submit("Create", class:"btn btn-primary  btn-block")%>
             <% else %>
               <%= f.submit("Update", class:"btn btn-primary  btn-block")%>

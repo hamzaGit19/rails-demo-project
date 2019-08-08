@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     get 'projects/show'
   end
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  # get 'users/new' => 'users/registrations#new'
 
   get 'register', to: 'users#new'
   post 'register', to: 'users#add_user'
@@ -36,7 +35,6 @@ Rails.application.routes.draw do
   end
 
   namespace :manager do
-    # match ':id' => 'users#destroy', :via => :delete, :as => :user_delete
     resources :clients
     resources :projects do
       resources :payments
@@ -58,11 +56,6 @@ Rails.application.routes.draw do
     end
   end
   get '*path', controller: 'application', action: 'page_not_found'
-
-  #   # get '*path' => redirect('/')
-  #   if Rails.env.development?
-  #     get '404', to: 'application#page_not_found'
-  #  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

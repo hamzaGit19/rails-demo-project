@@ -1,5 +1,5 @@
- 
+ $('#total_payment').empty();
 $('#form3').modal('hide');
- <% @project = @payment.project %>
+<% @project = @payment.project %>
 $('#payment').empty();
 $('#payment').append("<%= j render 'projects/payment', project: @project %>");

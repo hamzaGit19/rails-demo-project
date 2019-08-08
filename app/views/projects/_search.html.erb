@@ -1,0 +1,8 @@
+<div class="row">
+  <%= form_tag(url, method: :get,class: 'form-horizontal col-sm-6 offset-md-3') do %>
+    <%= text_field_tag :title, nil, placeholder: 'Search a project...', class: 'form-horizontal col-sm-9', required:true %>
+    <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+      <i class="fa fa-search"></i>
+    <% end %>
+  <% end %>
+</div>

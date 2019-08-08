@@ -10,27 +10,27 @@
           <%= form_for Client.new, url: manager_clients_path do |f| %>
             <div class="form-group">
               <label>Full Name:</label>
-              <%= f.text_field :name, autofocus: true, autocomplete: "name" ,class:"form-control" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name" ,class:"form-control", required:true %>
               <span class="Error"></span>
             </div>
             <div class="form-group">
               <label>Email:</label>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control" , required:true%>
               <span class="Error"></span>
             </div>
             <div class="form-group">
               <label>Company:</label>
-              <%= f.text_field :company, autofocus: true, autocomplete: "company",class:"form-control" %>
+              <%= f.text_field :company, autofocus: true, autocomplete: "company",class:"form-control" , required:true%>
               <span class="Error"></span>
             </div>
             <div class="form-group">
               <label>Phone:</label>
-              <%= f.text_field :phone, autofocus: true, autocomplete: "Phone",class:"form-control" %>
+              <%= f.text_field :phone, autofocus: true, autocomplete: "Phone",class:"form-control", required:true %>
               <span class="Error"></span>
             </div>
             <div class="form-group">
               <label>Company Phone:</label>
-              <%= f.text_field :compnay_phone, autofocus: true, autocomplete: "Company",class:"form-control" %>
+              <%= f.text_field :compnay_phone, autofocus: true, autocomplete: "Company",class:"form-control", required:true %>
               <span class="Error"></span>
             </div>
             <div class="form-group">
@@ -43,7 +43,7 @@
               <%= f.text_field :referred_by, autofocus: true, autocomplete: "Referred by(Company,person)",class:"form-control" %>
               <span class="Error"></span>
             </div>
-            <% if current_page?(:controller => 'admin/clients', :action => 'new') %>
+            <% if current_page?(controller: 'admin/clients', action:  'new') %>
               <%= f.submit("Create", class:"btn btn-primary  btn-block")%>
             <% else %>
               <%= f.submit("Update", class:"btn btn-primary  btn-block")%>

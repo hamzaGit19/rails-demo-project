@@ -44,7 +44,11 @@ class TimeLogsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_time_log
-    @time_log = TimeLog.find(params[:id])
+    if TimeLog.exists?(id: params[:id])
+      @time_log = TimeLog.find(params[:id])
+    else
+      redirect_to dashboard_root_path, notice: "Timelog does not exist."
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -53,6 +57,10 @@ class TimeLogsController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
+    if Project.exists?(id: params[:project_id])
+      @project = Project.find(params[:project_id])
+    else
+      redirect_to dashboard_root_path, notice: "Project does not exist."
+    end
   end
 end

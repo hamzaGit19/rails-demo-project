@@ -16,7 +16,7 @@ class Manager::ClientsController < ManagerBaseController
   def update
     respond_to do |format|
       if @client.update(create_params)
-        format.html { redirect_to admin_clients_path, notice: 'Client was successfully updated.' }
+        format.html { redirect_to admin_clients_path, notice: "Client was successfully updated." }
       else
         format.html { render :edit }
       end
@@ -27,7 +27,7 @@ class Manager::ClientsController < ManagerBaseController
     @client = Client.new(create_params)
     respond_to do |format|
       if @client.save
-        format.html { redirect_to dashboard_root_path, notice: 'Client was successfully created.' }
+        format.html { redirect_to dashboard_root_path, notice: "Client was successfully created." }
       else
         format.html { render :new }
       end
@@ -39,6 +39,10 @@ class Manager::ClientsController < ManagerBaseController
   end
 
   def set_client
-    @client = Client.find(params[:id])
+    if Client.exists?(id: params[:id])
+      @client = Client.find(params[:id])
+    else
+      redirect_to dashboard_root_path, notice: "Client does not exist."
+    end
   end
 end

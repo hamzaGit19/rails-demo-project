@@ -7,7 +7,7 @@
           <%= form_for(@project, url:_url) do |f| %>
             <div class="form-group">
               <label>Name: </label>
-              <%= f.text_field :name, autofocus: true, autocomplete: "Name",class:"form-control" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "Name",class:"form-control" , required:true%>
               <span class="Error"></span>
             </div>
             <div class="form-group">
@@ -29,7 +29,7 @@
               <label>Employees:</label>
               <%= f.select :employees,
                Employee.all.map { |employee| [employee.name, employee.id] },
-               { include_blank: true, :selected => @project.employees.pluck(:id) },
+               { include_blank: true, selected: @project.employees.pluck(:id) },
                { multiple:true,class: 'chosen-select' }
             %></div>
             <div class="form-group">

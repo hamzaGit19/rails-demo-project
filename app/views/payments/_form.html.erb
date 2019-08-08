@@ -16,7 +16,7 @@
             <% end %>
            <div class="form-group">
               <label>Cost:</label>
-              <%=  f.number_field :amount,class:"form-control", min:100 %>
+              <%=  f.number_field :amount,class:"form-control", min:100 , required:true%>
               <span class="Error"></span>
             </div>
             <%= f.submit("Create", class:"btn btn-primary  btn-block")%>
