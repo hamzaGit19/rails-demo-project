@@ -48,6 +48,8 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'mini_magick', '~> 4.3'
 gem 'pundit'
+gem "chartkick"
+
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 # Till here

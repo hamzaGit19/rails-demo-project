@@ -27,7 +27,10 @@
                 <td><%=person.phone%></td>
                 <td><%= person.company%></td>
                 <td>
-                  <span> <%=link_to(employee_client_path(person), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-eye"></i> <%end%> </span>
+                  <span>
+                    <%=link_to(employee_client_path(person), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>
+                    <i class="fa fa-eye"></i>
+                  <%end%> </span>
                  </td>
               </tr>
             <% end %>
@@ -39,7 +42,7 @@
           </div>
         </div>
       </div>
-      <!-- /widget-content -->
+  <!-- /widget-content -->    
     </div>
     <!-- /widget -->
   </div>

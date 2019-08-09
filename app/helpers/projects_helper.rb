@@ -33,23 +33,30 @@ module ProjectsHelper
     employees
   end
 
+  def total_payments(project)
+   total = project.payments.sum(:amount)
+  end
+  def total_hours(project)
+    total = project.time_logs.sum(:hours)
+   end
+
   def get_time_url(current_user)
-    if current_user.admin?
-      _time_url = admin_project_time_logs_path(@project)
-    elsif current_user.manager?
-      _time_url = manager_project_time_logs_path(@project)
-    else
-      _time_url = employee_project_time_logs_path(@project)
-    end
+    _time_url = if current_user.admin?
+                  admin_project_time_logs_path(@project)
+                elsif current_user.manager?
+                  manager_project_time_logs_path(@project)
+                else
+                  employee_project_time_logs_path(@project)
+                end
   end
 
   def get_payment_url(current_user)
-    if current_user.admin?
-      _payment_url = admin_project_payments_path(@project)
-    elsif current_user.manager?
-      _payment_url = manager_project_payments_path(@project)
-    else
-      _payment_url = ""
-    end
+    _payment_url = if current_user.admin?
+                     admin_project_payments_path(@project)
+                   elsif current_user.manager?
+                     manager_project_payments_path(@project)
+                   else
+                     ''
+                   end
   end
 end
