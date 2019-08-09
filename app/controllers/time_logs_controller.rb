@@ -2,7 +2,7 @@
 
 class TimeLogsController < ApplicationController
   before_action :set_time_log, only: %i[show edit update destroy]
-  before_action :set_project, only: %i[index new show edit update destroy create]
+  before_action :set_project
 
   # GET /time_logs
   # GET /time_logs.json

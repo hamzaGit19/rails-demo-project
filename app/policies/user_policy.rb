@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
-  def is_allowed?
+  def new?
+    return true if @user.admin? or @user.manager?
+  end
+
+  def add_user?
     return true if @user.admin? or @user.manager?
   end
 end

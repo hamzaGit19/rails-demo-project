@@ -4,8 +4,6 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :set_user, only: %i[show index]
 
-  # GET /projects
-  # GET /projects.json
   def index
     @projects = if params[:title]
                   params.merge!(role: current_user.type, user_id: current_user.id)
@@ -13,17 +11,13 @@ class ProjectsController < ApplicationController
                 else
                   if current_user.employee?
                     @projects = @user.projects
-                  elsif current_user.manager?
+                  else
                     @projects = Project.all
                   end
                 end
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
-    authorize @project, :is_allowed?, policy_class: ProjectPolicy
-
     respond_to do |format|
       format.html
       format.pdf do
@@ -61,7 +55,6 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    authorize User, :is_admin?, policy_class: ProjectPolicy
     @project.destroy
   end
 
@@ -75,9 +68,11 @@ class ProjectsController < ApplicationController
       redirect_to dashboard_root_path, notice: "Project does not exist."
     end
   end
+
   def set_user
     @user = User.find(current_user.id)
   end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
     params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :cost, employees: [], files: [])

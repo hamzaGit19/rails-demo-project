@@ -25,8 +25,6 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-    authorize User, :is_allowed?, policy_class: PaymentPolicy
-
     @payment = Payment.new(payment_params)
     @payment.project_id = @project.id
     @payment.creator_id = current_user.id
