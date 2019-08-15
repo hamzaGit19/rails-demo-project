@@ -12,14 +12,10 @@ class Admin::UsersController < AdminBaseController
 
   def update
     authorize(@user)
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to dashboard_root_path, notice: "user was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      redirect_to dashboard_root_path, notice: 'user was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -27,9 +23,8 @@ class Admin::UsersController < AdminBaseController
 
   def destroy
     authorize(@user)
-
     @user.destroy
-    redirect_to dashboard_root_path, notice: "User deleted."
+    redirect_to dashboard_root_path, notice: 'User deleted.'
   end
 
   def user_params
@@ -37,11 +32,8 @@ class Admin::UsersController < AdminBaseController
   end
 
   def set_user
-    if User.exists?(id: params[:id])
-      @user = User.find(params[:id])
-    else
-      redirect_to dashboard_root_path, notice: "User does not exist."
-    end
+    @user = User.find_by_id(params[:id])
+    redirect_to(root_url, notice: 'User not found') unless @user
   end
 
   def klass

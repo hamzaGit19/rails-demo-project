@@ -9,11 +9,11 @@ class ProjectsController < ApplicationController
                   params.merge!(role: current_user.type, user_id: current_user.id)
                   Project.apply_filters(params)
                 else
-                  if current_user.employee?
-                    @projects = @user.projects
-                  else
-                    @projects = Project.all
-                  end
+                  @projects = if current_user.employee?
+                                @user.projects
+                              else
+                                Project.all
+                              end
                 end
   end
 
@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "file_name" # Excluding ".pdf" extension.
+        render pdf: 'file_name' # Excluding ".pdf" extension.
       end
     end
   end
@@ -37,6 +37,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    byebug
     @project = Project.new(project_params.except(:employees))
     @project.creator_id = current_user.id
     employee_ids = get_employee_ids
@@ -62,15 +63,13 @@ class ProjectsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_project
-    if Project.exists?(id: params[:id])
-      @project = Project.find(params[:id])
-    else
-      redirect_to dashboard_root_path, notice: "Project does not exist."
-    end
+    @project = Project.find_by_id(params[:id])
+    redirect_to(root_url, notice: 'Record not found') unless @project
   end
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.find_by_id(current_user.id)
+    redirect_to(root_url, notice: 'Record not found') unless @user
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -80,16 +79,18 @@ class ProjectsController < ApplicationController
 
   def get_employee_ids
     employee_ids = project_params[:employees]
-    employee_ids.delete("")
+    employee_ids.delete('')
     employee_ids
   end
 
   def add_employees(employee_ids)
+    byebug
     employee_ids.each do |e_id|
-      unless @project.employees.exists?(id: e_id)
-        @employee = Employee.find(e_id)
-        @project.employees << @employee
-      end
+      # unless @project.employees.exists?(id: e_id)
+      byebug
+      @employee = Employee.find(e_id)
+      @project.employees << @employee
+      # end
     end
   end
 end

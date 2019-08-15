@@ -19,12 +19,12 @@ class AdminPolicy < ApplicationPolicy
   end
 
   def destroy?
-     if @record.admin?
+    if @record.admin?
       # @counter = Admin.size
       return false if Admin.count == 1
     else
       @user.admin?
-    end
+   end
   end
 
   def new_user?

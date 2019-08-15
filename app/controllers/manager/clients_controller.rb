@@ -23,24 +23,20 @@ class Manager::ClientsController < ManagerBaseController
   def update
     authorize(@client)
 
-    respond_to do |format|
-      if @client.update(create_params)
-        format.html { redirect_to admin_clients_path, notice: "Client was successfully updated." }
-      else
-        format.html { render :edit }
-      end
+    if @client.update(create_params)
+      redirect_to manager_client_path(@client), notice: 'Client was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def create
     authorize(Client)
     @client = Client.new(create_params)
-    respond_to do |format|
-      if @client.save
-        format.html { redirect_to dashboard_root_path, notice: "Client was successfully created." }
-      else
-        format.html { render :new }
-      end
+    if @client.save
+      redirect_to manager_client_path(@client), notice: 'Client was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -49,15 +45,11 @@ class Manager::ClientsController < ManagerBaseController
   end
 
   def set_client
-    if Client.exists?(id: params[:id])
-      @client = Client.find(params[:id])
-    else
-      redirect_to dashboard_root_path, notice: "Client does not exist."
-    end
+    @client = Client.find_by_id(params[:id])
+    redirect_to(dashboard_root_path, notice: 'Record not found') unless @client
   end
 
   def authorize(record, query = nil)
     super([:manager, record], query)
   end
-
 end

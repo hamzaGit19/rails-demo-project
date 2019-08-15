@@ -1,25 +1,24 @@
 # frozen_string_literal: true
 
 class Manager::ProjectPolicy < ApplicationPolicy
-   
   def index?
-      @user.manager?
+    @user.manager?
   end
 
   def create?
-      @user.manager?
+    @user.manager?
   end
 
   def update?
-      @user.manager?
+    @user.manager?
   end
 
   def edit?
-      @user.manager?
+    @user.manager?
   end
 
   def destroy?
-      false
+    false
   end
 
   def show?

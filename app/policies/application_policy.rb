@@ -40,10 +40,8 @@ class ApplicationPolicy
     attr_reader :user, :scope
 
     def initialize(user, scope)
-       
       @user = user
-      @scope = scope.is_a?(Array) ? scope.last : scope #This fixes the problem
-
+      @scope = scope.is_a?(Array) ? scope.last : scope # This fixes the problem
     end
 
     def resolve

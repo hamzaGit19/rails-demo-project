@@ -9,25 +9,21 @@ class Manager::PaymentsController < PaymentsController
   def update
     super
     authorize(@payment)
-    respond_to do |format|
-      if @payment.update(payment_params.except(:employees))
-        format.html { redirect_to manager_project_payments_path(@project), notice: "Payment was successfully updated." }
-      else
-        format.html { render :edit }
-      end
+
+    if @payment.update(payment_params.except(:employees))
+      redirect_to manager_project_payments_path(@project), notice: 'Payment was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def create
     authorize(Payment)
     super
-    respond_to do |format|
-      if @payment.save
-        format.js
-        format.html { redirect_to manager_project_payments_path(@project), notice: "Payment was successfully created." }
-      else
-        format.html { render :new }
-      end
+
+    if @payment.save
+    else
+      render :new
     end
   end
 
@@ -36,7 +32,7 @@ class Manager::PaymentsController < PaymentsController
     super
   end
 
-  def destroy 
+  def destroy
     authorize(Payment)
     super
   end

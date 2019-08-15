@@ -22,20 +22,14 @@ class TimeLogsController < ApplicationController
   # GET /time_logs/1/edit
   def edit; end
 
-  # POST /time_logs
-  # POST /time_logs.json
   def create
     @time_log = TimeLog.new(time_log_params)
     @time_log.project_id = @project.id
     @time_log.creator_id = current_user.id
   end
 
-  # PATCH/PUT /time_logs/1
-  # PATCH/PUT /time_logs/1.json
   def update; end
 
-  # DELETE /time_logs/1
-  # DELETE /time_logs/1.json
   def destroy
     @time_log.destroy
   end
@@ -44,11 +38,8 @@ class TimeLogsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_time_log
-    if TimeLog.exists?(id: params[:id])
-      @time_log = TimeLog.find(params[:id])
-    else
-      redirect_to dashboard_root_path, notice: "Timelog does not exist."
-    end
+    @time_log = TimeLog.find_by_id(params[:id])
+    redirect_to(root_url, notice: 'Record not found') unless @time_log
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -57,10 +48,7 @@ class TimeLogsController < ApplicationController
   end
 
   def set_project
-    if Project.exists?(id: params[:project_id])
-      @project = Project.find(params[:project_id])
-    else
-      redirect_to dashboard_root_path, notice: "Project does not exist."
-    end
+    @project = Project.find_by_id(params[:project_id])
+    redirect_to(root_url, notice: 'Record not found') unless @project
   end
 end

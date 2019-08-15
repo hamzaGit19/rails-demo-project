@@ -55,10 +55,17 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <%= column_chart  Project.joins(:payments).limit(5).group(:name).sum(:amount),  stacked: true,label: "Top projects",xtitle: "Project name", ytitle: "Earnings", title: "Top Projects", download: {background: "#ffffff"},  colors: ["#34ebb1", "#34ebb1"] %>
+    <%= column_chart  Project.joins(:payments).limit(5).group(:name).sum(:amount),  stacked: true,label: "Top projects",xtitle: "Project name", ytitle: "Earnings", title: "Top Projects", download: {background: "#3734eb"},  colors: ["#34ebb1", "#34ebb1"] %>
   </div>
   <div class="col-md-6">
-    <%= column_chart  Project.joins(:payments).limit(5).group(:name).order("SUM(amount)").sum(:amount), label: "Bottom projects",xtitle: "Project name", ytitle: "Earnings", title: "Bottom projects", download: {background: "#ffffff"},  colors: ["#d65b1e", "#d65b1e"] %>
+    <%= column_chart  Project.joins(:payments).limit(5).group(:name).order("SUM(amount)").sum(:amount), label: "Bottom projects",xtitle: "Project name", ytitle: "Earnings", title: "Bottom projects", download: {background: "#3734eb"},  colors: ["#d65b1e", "#d65b1e"] %>
   </div>
 </div>
- 
+<div class="row">
+  <div class="col-md-6">
+    <%= pie_chart Client.joins(:projects).limit(3).group(:name).count(:id),  donut: true,label: "Top Clients", title: "Top Clients", download: {background: "#3734eb"},  colors: ["#34ebb1", "#d65b1e","#5ef4ff"] %>
+  </div>
+  <div class="col-md-6">
+    <%= pie_chart Employee.where("time_logs.created_at > ?", Time.now-7.days).joins('INNER JOIN time_logs ON users.id = time_logs.employee_id').limit(3).group(:name).count(:hours),  donut: true,label: "Top Performers", title: "Top Perfromers of this week", download: {background: "#3734eb"},  colors: ["#34ebb1", "#d65b1e","#5ef4ff"] %>
+  </div>
+</div>

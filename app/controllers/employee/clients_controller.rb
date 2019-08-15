@@ -10,6 +10,7 @@ class Employee::ClientsController < ApplicationController
   end
 
   def set_client
-    @client = Client.find(params[:id])
+    @client = Client.find_by_id(params[:id])
+    redirect_to(root_url, notice: 'Client not found') unless @client
   end
 end

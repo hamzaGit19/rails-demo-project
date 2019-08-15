@@ -23,8 +23,8 @@ class UsersController < ApplicationController
   end
 
   def add_user
-    authorize User 
-    @user = User.new(user_params2)
+    authorize User
+    @user = User.new(user_create_params)
     redirect_to root_path if @user.save!
   end
 
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     params.require(klass.to_s.underscore).permit(:name, :email, :id, :image)
   end
 
-  def user_params2
+  def user_create_params
     params.require(:user).permit(:name, :email, :password, :type)
   end
 

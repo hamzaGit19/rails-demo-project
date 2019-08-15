@@ -8,6 +8,13 @@ class User < ApplicationRecord
   paginates_per 7
   mount_uploader :image, ImageUploader
 
+  validates :email, uniqueness: true
+  validates :name, presence: true
+  validates :password, confirmation: true
+  # validates :password_confirmation, presence: true
+  validates :type, inclusion: { in: %w[Admin Manager Employee],
+                                message: '%{value} is not a valid type' }
+
   scope :managerUsers, -> { where.not type: %w[Admin] }
 
   def admin?
