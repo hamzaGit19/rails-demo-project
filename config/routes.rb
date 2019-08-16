@@ -1,31 +1,41 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'projects/:project_id/time_logs/:id', to: 'time_logs#show', as: 'project_time_log_path'
-  get 'projects/:project_id/payments/:id', to: 'payments#show', as: 'project_payment_path'
+  get "projects/:project_id/time_logs/:id", to: "time_logs#show", as: "project_time_log_path"
+  get "projects/:project_id/payments/:id", to: "payments#show", as: "project_payment_path"
 
   namespace :admin do
-    get 'projects/index'
-    get 'projects/show'
-  end
-  devise_for :users, controllers: { registrations: 'users/registrations' }
-
-  get 'register', to: 'users#new'
-  post 'register', to: 'users#add_user'
-
-  namespace :dashboard do
-    get 'dashboard/index'
+    get "projects/index"
+    get "projects/show"
   end
 
-  get 'dashboard/index'
-  root to: 'pages#index'
+  namespace :api do
+    namespace :v1 do
+      devise_for :users, skip: :all
+      devise_scope :user do
+        post "users", to: "sessions#create", as: nil
+      end
+    end
+  end
+
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
+  get "register", to: "users#new"
+  post "register", to: "users#add_user"
 
   namespace :dashboard do
-    root to: 'dashboard#index'
+    get "dashboard/index"
+  end
+
+  get "dashboard/index"
+  root to: "pages#index"
+
+  namespace :dashboard do
+    root to: "dashboard#index"
   end
 
   namespace :admin do
-    match ':id' => 'users#destroy', :via => :delete, :as => :user_delete
+    match ":id" => "users#destroy", :via => :delete, :as => :user_delete
     resources :users
     resources :clients
     resources :projects do
@@ -47,15 +57,16 @@ Rails.application.routes.draw do
       resources :time_logs
     end
   end
-  resources:comments
+  resources :comments
 
-  resource :user, controller: 'users' do
+  resource :user, controller: "users" do
     collection do
-      get 'change_password'
-      patch 'update_password'
+      get "change_password"
+      patch "update_password"
     end
   end
-  get '*path', controller: 'application', action: 'page_not_found'
+
+  get "*path", controller: "application", action: "page_not_found"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

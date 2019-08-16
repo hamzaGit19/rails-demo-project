@@ -3,8 +3,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable,
-         :recoverable, :rememberable
+  attr_accessor :shared_secret
+  attr_accessor :token_expires
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
+
   paginates_per 7
   mount_uploader :image, ImageUploader
 
@@ -13,7 +18,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   # validates :password_confirmation, presence: true
   validates :type, inclusion: { in: %w[Admin Manager Employee],
-                                message: '%{value} is not a valid type' }
+                                message: "%{value} is not a valid type" }
 
   scope :managerUsers, -> { where.not type: %w[Admin] }
 
@@ -34,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def image?
-    if image.eql? 'null'
+    if image.eql? "null"
       false
     else
       true

@@ -6,13 +6,13 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :unauthorized_user
 
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
 
   def unauthorized_user
-    flash[:alert] = 'You are not authorized to perform this action.'
+    flash[:alert] = "You are not authorized to perform this action."
     redirect_to(request.referrer || root_path)
   end
 
@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
 
   def page_not_found
     respond_to do |format|
-      format.html { render template: 'application/error404', layout: 'layouts/application', status: 404 }
-      format.all  { render nothing: true, status: 404 }
+      format.html { render template: "application/error404", layout: "layouts/application", status: 404 }
+      format.all { render nothing: true, status: 404 }
     end
   end
 end

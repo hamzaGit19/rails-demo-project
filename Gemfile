@@ -41,6 +41,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Adding my own gems from here
 gem 'bootstrap', '~> 4.0.0'
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
+gem 'chartkick'
 gem 'chosen-rails'
 gem 'devise'
 gem 'font-awesome-rails'
@@ -48,7 +49,9 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'mini_magick', '~> 4.3'
 gem 'pundit'
-gem "chartkick"
+gem 'active_model_serializers', '0.9.3'
+gem 'rack-cors'
+gem 'devise-jwt', '~> 0.5.8'
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
