@@ -12,6 +12,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       @user.shared_secret = session_attributes[:shared_secret]
       @user.token_expires = session_attributes[:token_expires]
       render json: { token: generate_token(@user) }
+      byebug
     else
       render json: { errors: ["Invalid Username/Password"] }, status: :unauthorized
     end

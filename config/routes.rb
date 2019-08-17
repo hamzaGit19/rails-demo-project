@@ -15,6 +15,16 @@ Rails.application.routes.draw do
       devise_scope :user do
         post "users", to: "sessions#create", as: nil
       end
+      namespace :admin do
+        match ":id" => "users#destroy", :via => :delete, :as => :user_delete
+        resources :users
+        resources :clients
+        resources :projects do
+          resources :payments
+          resources :time_logs
+        end
+      end
+      resources :projects
     end
   end
 
