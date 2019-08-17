@@ -24,6 +24,20 @@ Rails.application.routes.draw do
           resources :time_logs
         end
       end
+      namespace :manager do
+        resources :clients
+        resources :projects do
+          resources :payments
+          resources :time_logs
+        end
+      end
+      namespace :employee do
+        resources :clients, only: %i[index show]
+        resources :projects do
+          resources :time_logs
+        end
+      end
+
       resources :projects
     end
   end

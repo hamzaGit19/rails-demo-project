@@ -24,19 +24,21 @@ class Api::V1::ProjectsController < Api::V1::BaseController
     end
   end
 
+  def show
+    render json: @project
+  end
+
   def destroy
     @project.destroy
   end
 
   def get_employee_ids
-    byebug
     employee_ids = project_params[:employees]
     employee_ids
   end
 
   def add_employees(employee_ids)
     employee_ids.each do |e_id|
-      byebug
       @employee = Employee.find(e_id)
       @project.employees << @employee
     end

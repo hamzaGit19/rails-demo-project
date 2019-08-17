@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::UsersController < AdminBaseController
+class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy]
 
   def index; end
@@ -11,9 +11,9 @@ class Admin::UsersController < AdminBaseController
   end
 
   def update
-    authorize(@user)
+    authorize(User)
     if @user.update(user_params)
-      redirect_to dashboard_root_path, notice: 'user was successfully updated.'
+      redirect_to dashboard_root_path, notice: "user was successfully updated."
     else
       render :edit
     end
@@ -22,9 +22,9 @@ class Admin::UsersController < AdminBaseController
   def edit; end
 
   def destroy
-    authorize(@user)
+    authorize(User)
     @user.destroy
-    redirect_to dashboard_root_path, notice: 'User deleted.'
+    redirect_to dashboard_root_path, notice: "User deleted."
   end
 
   def user_params
@@ -33,7 +33,7 @@ class Admin::UsersController < AdminBaseController
 
   def set_user
     @user = User.find_by_id(params[:id])
-    redirect_to(root_url, notice: 'User not found') unless @user
+    redirect_to(root_url, notice: "User not found") unless @user
   end
 
   def klass

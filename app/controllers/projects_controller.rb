@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'file_name' # Excluding ".pdf" extension.
+        render pdf: "file_name" # Excluding ".pdf" extension.
       end
     end
   end
@@ -49,7 +49,6 @@ class ProjectsController < ApplicationController
   def update
     @project.employees.delete(@project.employees)
     employee_ids = get_employee_ids
-
     add_employees(employee_ids)
   end
 
@@ -64,12 +63,12 @@ class ProjectsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.find_by_id(params[:id])
-    redirect_to(root_url, notice: 'Record not found') unless @project
+    redirect_to(root_url, notice: "Record not found") unless @project
   end
 
   def set_user
     @user = User.find_by_id(current_user.id)
-    redirect_to(root_url, notice: 'Record not found') unless @user
+    redirect_to(root_url, notice: "Record not found") unless @user
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -79,7 +78,7 @@ class ProjectsController < ApplicationController
 
   def get_employee_ids
     employee_ids = project_params[:employees]
-    employee_ids.delete('')
+    employee_ids.delete("")
     employee_ids
   end
 

@@ -24,7 +24,7 @@ class Manager::ClientsController < ManagerBaseController
     authorize(@client)
 
     if @client.update(create_params)
-      redirect_to manager_client_path(@client), notice: 'Client was successfully updated.'
+      redirect_to manager_client_path(@client), notice: "Client was successfully updated."
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class Manager::ClientsController < ManagerBaseController
     authorize(Client)
     @client = Client.new(create_params)
     if @client.save
-      redirect_to manager_client_path(@client), notice: 'Client was successfully created.'
+      redirect_to manager_client_path(@client), notice: "Client was successfully created."
     else
       render :new
     end
@@ -46,7 +46,7 @@ class Manager::ClientsController < ManagerBaseController
 
   def set_client
     @client = Client.find_by_id(params[:id])
-    redirect_to(dashboard_root_path, notice: 'Record not found') unless @client
+    redirect_to(dashboard_root_path, notice: "Record not found") unless @client
   end
 
   def authorize(record, query = nil)
