@@ -34,11 +34,12 @@ module ProjectsHelper
   end
 
   def total_payments(project)
-   total = project.payments.sum(:amount)
+    total = project.payments.sum(:amount)
   end
+
   def total_hours(project)
     total = project.time_logs.sum(:hours)
-   end
+  end
 
   def get_time_url(current_user)
     _time_url = if current_user.admin?
@@ -56,7 +57,23 @@ module ProjectsHelper
                    elsif current_user.manager?
                      manager_project_payments_path(@project)
                    else
-                     ''
+                     ""
                    end
+  end
+
+  def get_top_projects
+    Project.joins(:payments).limit(5).group(:name).sum(:amount)
+  end
+
+  def get_bottome_projects
+    Project.joins(:payments).limit(5).group(:name).order("SUM(amount)").sum(:amount)
+  end
+
+  def get_top_employees
+    Employee.where("time_logs.created_at > ?", Time.now - 7.days).joins("INNER JOIN time_logs ON users.id = time_logs.employee_id").limit(3).group(:name).count(:hours)
+  end
+
+  def get_top_client
+    Client.joins(:projects).limit(3).group(:name).count(:id)
   end
 end

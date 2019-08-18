@@ -7,12 +7,7 @@
           <%= form_for(@user, url:user_path(@user)) do |f| %>
             <%= render "devise/shared/error_messages", resource: @user %>
             <div class="preview text-center">
-              <%if @user.image?%>
-                <%= image_tag @user.image.thumb.url, class: "rounded-circle", width:"200", height:"200"%>
-                <%# <img class="preview-img" src="http://simpleicon.com/wp-content/uploads/account.png" alt="Preview Image" width="200" height="200"/> %>
-              <%else%>
-                <%= image_tag @user.image.thumb.url, class: "rounded-circle", width:"200", height:"200"%>
-              <%end%>
+              <%=  display_avatar(@user) %>
               <div class="browse-button form-group">
                 <i class="fa fa-pencil-alt"></i>
                 <%= f.file_field :image ,  class:"browse-input" ,id:"UploadedFile"%>
@@ -35,7 +30,6 @@
             </div>
           <%end%>
         </div>
-       
       </div>
     </div>
   </div>

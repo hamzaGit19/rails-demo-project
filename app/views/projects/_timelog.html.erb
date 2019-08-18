@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <%@time_logs = @project.time_logs.order(:created_at).page(params[:page])%>
+    <%@time_logs = @project.time_logs.order(:created_at).page(params[:timelog_page])%>
     <% @time_logs.each do |time_log| %>
       <tr>
         <td><%= time_log.hours %></td>
@@ -21,8 +21,7 @@
     <% end %>
     <div id="total_hours">
       Total:<%=total_hours(@project)%>
-      <%= paginate @time_logs  %>
+      <%= paginate @time_logs, param_name: :timelog_page%>
     </div>
   </tbody>
-
 </table>

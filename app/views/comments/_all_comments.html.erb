@@ -1,27 +1,22 @@
 <div id="comments-all">
-  <% @comments = object_.comments.order(:created_at).page(params[:page]) %>
+  <% @comments = object_.comments.order(:created_at).page(params[:comments_page]) %>
   <% object_.comments.each do |comment| %>
     <div class="comment-wrap">
       <div class="photo">
         <% @u=User.find(comment.creator_id) %>
-        <%if @u.image?%>
-          <%= image_tag @u.image.thumb.url, class: "rounded-circle", width:"50", height:"50"%>
-        <% else %>
-          <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
-        <% end %>
+        <%=  display_avatar_comment(@u) %>
       </div>
       <div class="comment-block">
         <p class="comment-text"><%= comment.content %></p>
         <div class="bottom-comment">
           <div class="comment-date"><%= comment.created_at%>\t</div>
           <div class="comment-date"> By:<%= get_user_name(comment.creator_id)%></div>
-          
           <%if comment.creator_id == current_user.id%>
-          <span> <%= link_to('Delete',comment_path(comment), method: :delete, data:{confirm: "are you sure?"} ,class:"btn btn-warning btn-xs glyphicon glyphicon-edit pull-right")%></span>
+            <span> <%= link_to('Delete',comment_path(comment), method: :delete, data:{confirm: "are you sure?"} ,class:"btn btn-warning btn-xs glyphicon glyphicon-edit pull-right")%></span>
           <%end%>
         </div>
       </div>
     </div>
   <% end %>
-  <%= paginate @comments %>
+  <%= paginate @comments, param_name: :comments_page %>
 </div>

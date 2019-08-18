@@ -8,8 +8,8 @@
     </tr>
   </thead>
   <tbody>
-    <%@payments = @project.payments.order(:created_at).page(params[:page])%>
-    <% (@payments).each do |payment| %>      
+    <%@payments = @project.payments.order(:created_at).page(params[:payments_page])%>
+    <% (@payments).each do |payment| %>
       <tr>
         <td><%= payment.amount %></td>
         <td><%= get_user_name(payment.creator_id) %></td>
@@ -19,7 +19,7 @@
     <%end%>
     <div id="total_payment">
       Total:<%=total_payments(@project)%>
-      <%= paginate @payments  %>
+      <%= paginate @payments, param_name: :payments_page %>
     </div>
   </tbody>
 </table>

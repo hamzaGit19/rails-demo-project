@@ -1,14 +1,11 @@
- <div class="pad main-secction">
+ 
+<div class="pad main-secction">
   <div class="">
     <div class="row user-left-part">
       <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
         <div class="row ">
           <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-            <%if @user.image.eql? "null"%>
-              <%# <%= image_tag @user.image.thumb.url, class: "rounded-circle"%> %>
-            <%else%>
-              <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" class="rounded-circle">
-            <%end%>
+            <%=  display_avatar(@user) %>
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
             <button id="btn-contact" (click)="clearModal()" data-toggle="modal" data-target="#contact" class="btn btn-success btn-block follow">Dummy</button>
