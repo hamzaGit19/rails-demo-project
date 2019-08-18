@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::TimeLogsController < Api::V1::BaseController
   before_action :set_time_log, only: %i[show edit update destroy]
   before_action :set_project
@@ -27,7 +29,7 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
 
   def set_time_log
     @time_log = TimeLog.find_by_id(params[:id])
-    render json: { notice: "Record not found" } unless @time_log
+    render json: { notice: 'Record not found' } unless @time_log
   end
 
   def time_log_params
@@ -36,6 +38,6 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
 
   def set_project
     @project = Project.find_by_id(params[:project_id])
-    render json: { notice: "Record not found" } unless @project
+    render json: { notice: 'Record not found' } unless @project
   end
 end

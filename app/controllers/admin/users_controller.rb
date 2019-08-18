@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
   def update
     authorize(User)
     if @user.update(user_params)
-      redirect_to dashboard_root_path, notice: "user was successfully updated."
+      redirect_to dashboard_root_path, notice: 'user was successfully updated.'
     else
       render :edit
     end
@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     authorize(User)
     @user.destroy
-    redirect_to dashboard_root_path, notice: "User deleted."
+    redirect_to dashboard_root_path, notice: 'User deleted.'
   end
 
   def user_params
@@ -33,7 +33,7 @@ class Admin::UsersController < ApplicationController
 
   def set_user
     @user = User.find_by_id(params[:id])
-    redirect_to(root_url, notice: "User not found") unless @user
+    redirect_to(root_url, notice: 'User not found') unless @user
   end
 
   def klass

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::Manager::ProjectsController < Api::V1::ProjectsController
   def index
     # authorize(Project)
@@ -10,7 +12,7 @@ class Api::V1::Manager::ProjectsController < Api::V1::ProjectsController
     if @project.save(project_params.except(:employees))
       render json: @project
     else
-      render json: { message: "Error creating project." }
+      render json: { message: 'Error creating project.' }
     end
   end
 
@@ -20,13 +22,17 @@ class Api::V1::Manager::ProjectsController < Api::V1::ProjectsController
     if @project.update(project_params.except(:employees))
       render json: @project
     else
-      render json: { message: "Error updating project." }
+      render json: { message: 'Error updating project.' }
     end
   end
 
   def destroy
     # authorize(@project)
     super
-    render json: { message: "Deleted project." }
+    render json: { message: 'Deleted project.' }
+  end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, :manager, record], query)
   end
 end

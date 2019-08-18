@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Api::V1::Admin::TimeLogsController < Api::V1::TimeLogsController
   def destroy
     # authorize(@time_log)
     super
-    render json: { messgae: "Destroyed time log" }
+    render json: { messgae: 'Destroyed time log' }
   end
 
   def update
@@ -11,7 +13,7 @@ class Api::V1::Admin::TimeLogsController < Api::V1::TimeLogsController
     if @time_log.update(time_log_params)
       render json: @time_log
     else
-      render json: { messgae: "Error updating the time log" }
+      render json: { messgae: 'Error updating the time log' }
     end
   end
 
@@ -26,7 +28,11 @@ class Api::V1::Admin::TimeLogsController < Api::V1::TimeLogsController
     if @time_log.save
       render json: @time_log
     else
-      render json: { messgae: "Error updating the time log" }
+      render json: { messgae: 'Error updating the time log' }
     end
+  end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, :admin, record], query)
   end
 end

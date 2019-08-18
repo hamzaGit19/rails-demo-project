@@ -17,8 +17,8 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :password, confirmation: true
   # validates :password_confirmation, presence: true
-  validates :type, inclusion: { in: %w[Admin Manager Employee],
-                                message: "%{value} is not a valid type" }
+  validates :type, presence: true, inclusion: { in: %w[Admin Manager Employee],
+                                                message: '%{value} is not a valid type' }
 
   scope :managerUsers, -> { where.not type: %w[Admin] }
 
@@ -39,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def image?
-    if image.eql? "null"
+    if image.eql? 'null'
       false
     else
       true

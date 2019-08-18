@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::ProjectsController < Api::V1::BaseController
   # before_action :authenticate_request!
   before_action :set_project, only: %i[show edit update destroy]
@@ -46,13 +48,13 @@ class Api::V1::ProjectsController < Api::V1::BaseController
 
   def set_project
     @project = Project.find_by_id(params[:id])
-    redirect_to(root_url, notice: "Record not found") unless @project
+    redirect_to(root_url, notice: 'Record not found') unless @project
   end
 
   def set_user
-    #Please replace it when you add token and authorization. This is just placeholder to make things smoothly.
+    # Please replace it when you add token and authorization. This is just placeholder to make things smoothly.
     @user = User.find_by_id(16)
-    redirect_to(root_url, notice: "Record not found") unless @user
+    redirect_to(root_url, notice: 'Record not found') unless @user
   end
 
   def project_params

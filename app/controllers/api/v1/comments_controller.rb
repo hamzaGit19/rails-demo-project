@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::CommentsController < Api::V1::BaseController
   before_action :load_commentable, only: %i[show edit update create index]
   before_action :set_comment, only: %i[edit update destroy]
@@ -15,7 +17,7 @@ class Api::V1::CommentsController < Api::V1::BaseController
     if @comment.save
       render json: @comment
     else
-      render json: { message: "Error creating comment." }
+      render json: { message: 'Error creating comment.' }
     end
   end
 
@@ -31,7 +33,7 @@ class Api::V1::CommentsController < Api::V1::BaseController
 
   def set_comment
     @comment = Comment.find_by_id(params[:id])
-    render json: { message: "Record not found" } unless @comment
+    render json: { message: 'Record not found' } unless @comment
   end
 
   def comments_params

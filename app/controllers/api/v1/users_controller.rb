@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 class Api::V1::UsersController < Api::V1::BaseController
   before_action :authenticate_user!
 
-  def show
-  end
+  def show; end
 
   def update
     if current_user.update_attributes(user_params)
@@ -14,11 +15,11 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def index
     users = User.all
-    render json: { data: "Hrllo" }
+    render json: { data: 'Hrllo' }
   end
 
   def new
-    render json: { data: "Hello testing" }
+    render json: { data: 'Hello testing' }
   end
 
   private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::Manager::ClientsController < Api::V1::BaseController
   before_action :set_client, only: %i[edit update destroy show]
 
@@ -12,7 +14,7 @@ class Api::V1::Manager::ClientsController < Api::V1::BaseController
     if @client.save
       render json: @client
     else
-      render json: { error: "Error Creating client." }
+      render json: { error: 'Error Creating client.' }
     end
   end
 
@@ -25,14 +27,14 @@ class Api::V1::Manager::ClientsController < Api::V1::BaseController
     if @client.update(create_params)
       render json: @client
     else
-      render json: { error: "Error updating client." }
+      render json: { error: 'Error updating client.' }
     end
   end
 
   def destroy
     # authorize(@client)
     @client.destroy
-    render json: { message: "Client deleted successfully." }
+    render json: { message: 'Client deleted successfully.' }
   end
 
   def create_params
@@ -41,5 +43,9 @@ class Api::V1::Manager::ClientsController < Api::V1::BaseController
 
   def set_client
     @client = Client.find_by_id(params[:id])
+  end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, :manager, record], query)
   end
 end

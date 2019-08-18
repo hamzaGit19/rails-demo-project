@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::PaymentsController < Api::V1::BaseController
   before_action :set_payment, only: %i[show edit update destroy]
   before_action :set_project, only: %i[index new show edit update destroy create]
@@ -15,11 +17,10 @@ class Api::V1::PaymentsController < Api::V1::BaseController
 
   def destroy
     @payment.destroy
-    render json: { message: "Payment deleted." }
+    render json: { message: 'Payment deleted.' }
   end
 
-  def update
-  end
+  def update; end
 
   def show
     render json: @payment

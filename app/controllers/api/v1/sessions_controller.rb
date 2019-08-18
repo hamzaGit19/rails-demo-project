@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require "#{Rails.root}/lib/json_web_token.rb"
 
 class Api::V1::SessionsController < Devise::SessionsController
@@ -14,10 +16,9 @@ class Api::V1::SessionsController < Devise::SessionsController
       render json: { token: generate_token(@user) }
       byebug
     else
-      render json: { errors: ["Invalid Username/Password"] }, status: :unauthorized
+      render json: { errors: ['Invalid Username/Password'] }, status: :unauthorized
     end
     # @user.update_attributes(session_attributes)
-
   end
 
   def destroy
@@ -28,17 +29,17 @@ class Api::V1::SessionsController < Devise::SessionsController
   private
 
   def generate_token(resource)
-    JWT.encode(token_payload(resource), resource.shared_secret, "HS256")
+    JWT.encode(token_payload(resource), resource.shared_secret, 'HS256')
   end
 
   def token_payload(resource)
-    { user: resource.email, exp: 200000 }
+    { user: resource.email, exp: 200_000 }
   end
 
   def session_attributes
     {
       shared_secret: create_secret,
-      token_expires: 1.week.from_now,
+      token_expires: 1.week.from_now
     }
   end
 

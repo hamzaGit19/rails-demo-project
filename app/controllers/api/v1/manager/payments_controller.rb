@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::Manager::PaymentsController < Api::V1::PaymentsController
   def create
     super
@@ -5,7 +7,7 @@ class Api::V1::Manager::PaymentsController < Api::V1::PaymentsController
     if @payment.save
       render json: @payment
     else
-      render json: { message: "Payment failed." }
+      render json: { message: 'Payment failed.' }
     end
   end
 
@@ -15,7 +17,11 @@ class Api::V1::Manager::PaymentsController < Api::V1::PaymentsController
     if @payment.update(payment_params)
       render json: @payment
     else
-      render json: { message: "Payment failed." }
+      render json: { message: 'Payment failed.' }
     end
+  end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, :manager, record], query)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::UserPolicy < ApplicationPolicy
+class Api::V1::Admin::ManagerPolicy < ApplicationPolicy
   def index?
     @user.admin?
   end
@@ -18,7 +18,10 @@ class Admin::UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    byebug
+    @user.admin?
+  end
+
+  def show?
     @user.admin?
   end
 

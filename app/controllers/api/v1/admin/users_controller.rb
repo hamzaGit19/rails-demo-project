@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::Admin::UsersController < Api::V1::BaseController
   before_action :set_user, only: %i[edit update destroy show]
 
@@ -15,14 +17,14 @@ class Api::V1::Admin::UsersController < Api::V1::BaseController
     if @user.update(user_params)
       render json: @user
     else
-      render json: { error: "Error updating user." }
+      render json: { error: 'Error updating user.' }
     end
   end
 
   def destroy
     # authorize(@client)
     @user.destroy
-    render json: { message: "User deleted successfully." }
+    render json: { message: 'User deleted successfully.' }
   end
 
   def create
@@ -30,7 +32,7 @@ class Api::V1::Admin::UsersController < Api::V1::BaseController
     if @user.save!
       render json: @user
     else
-      render json: { message: "Unable to create user " }
+      render json: { message: 'Unable to create user ' }
     end
   end
 
@@ -44,5 +46,9 @@ class Api::V1::Admin::UsersController < Api::V1::BaseController
 
   def user_params
     params.permit(:name, :email, :id, :status, :image)
+  end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, :admin, record], query)
   end
 end
