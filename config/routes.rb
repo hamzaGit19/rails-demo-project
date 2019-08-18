@@ -37,7 +37,7 @@ Rails.application.routes.draw do
           resources :time_logs
         end
       end
-
+      resources :comments
       resources :projects
     end
   end
