@@ -15,6 +15,8 @@
 //= require bootstrap
 //= require chosen-jquery
 //= require dashboard.coffee
+//= require chartkick
+//= require Chart.bundle
 
 
 //= require rails-ujs
