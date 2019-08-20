@@ -3,12 +3,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  attr_accessor :shared_secret
-  attr_accessor :token_expires
-
+  include Filterable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
+         :recoverable, :rememberable, :validatable
+  #  :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
 
   paginates_per 7
   mount_uploader :image, ImageUploader
@@ -21,6 +19,8 @@ class User < ApplicationRecord
                                                 message: '%{value} is not a valid type' }
 
   scope :managerUsers, -> { where.not type: %w[Admin] }
+  scope :user_name, ->(name) { where('name like ?', "#{name}%") }
+  scope :email, ->(email) { where email: email }
 
   def admin?
     instance_of?(Admin)
@@ -38,15 +38,15 @@ class User < ApplicationRecord
     instance_of?(Employee)
   end
 
-  def image?
-    if image.eql? 'null'
-      false
-    else
-      true
-    end
-  end
-
   def type?
     type
+  end
+
+  def self.apply_filter(params)
+    byebug
+    @users = User.where(nil) # creates an anonymous scope
+    @users = @users.user_name(params[:name]) if params[:name].present?
+    @users = @users.email(params[:email]) if params[:email].present?
+    @users
   end
 end

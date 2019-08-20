@@ -26,41 +26,31 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/new
   def new
     @project = Project.new
   end
 
-  # GET /projects/1/edit
   def edit; end
 
-  # POST /projects
-  # POST /projects.json
   def create
-    byebug
     @project = Project.new(project_params.except(:employees))
     @project.creator_id = current_user.id
     employee_ids = get_employee_ids
     add_employees(employee_ids)
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
     @project.employees.delete(@project.employees)
     employee_ids = get_employee_ids
     add_employees(employee_ids)
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     @project.destroy
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.find_by_id(params[:id])
     redirect_to(root_url, notice: 'Record not found') unless @project
@@ -83,10 +73,9 @@ class ProjectsController < ApplicationController
   end
 
   def add_employees(employee_ids)
-    byebug
     employee_ids.each do |e_id|
       # unless @project.employees.exists?(id: e_id)
-      byebug
+
       @employee = Employee.find(e_id)
       @project.employees << @employee
       # end

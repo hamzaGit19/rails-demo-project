@@ -4,13 +4,11 @@ class Admin::ProjectsController < ProjectsController
   def create
     # authorize(Project)
     super
-    byebug
     if @project.save(project_params.except(:employees))
-      byebug
       redirect_to admin_project_path(@project), notice: 'Project was successfully created.'
     else
       render :new
-    end
+   end
   end
 
   def update

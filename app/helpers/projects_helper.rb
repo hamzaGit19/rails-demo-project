@@ -57,7 +57,7 @@ module ProjectsHelper
                    elsif current_user.manager?
                      manager_project_payments_path(@project)
                    else
-                     ""
+                     ''
                    end
   end
 
@@ -66,11 +66,11 @@ module ProjectsHelper
   end
 
   def get_bottome_projects
-    Project.joins(:payments).limit(5).group(:name).order("SUM(amount)").sum(:amount)
+    Project.joins(:payments).limit(5).group(:name).order('SUM(amount)').sum(:amount)
   end
 
   def get_top_employees
-    Employee.where("time_logs.created_at > ?", Time.now - 7.days).joins("INNER JOIN time_logs ON users.id = time_logs.employee_id").limit(3).group(:name).count(:hours)
+    Employee.where('time_logs.created_at > ?', Time.now - 7.days).joins('INNER JOIN time_logs ON users.id = time_logs.employee_id').limit(3).group(:name).count(:hours)
   end
 
   def get_top_client

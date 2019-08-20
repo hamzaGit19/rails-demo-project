@@ -1,21 +1,20 @@
 # frozen_string_literal: true
 
-class Api::V1::Admin::ClientsController < Api::V1::BaseController
+class Api::V1::ClientsController < Api::V1::BaseController
   before_action :set_client, only: %i[edit update destroy show]
 
   def index
-    # authorize (Client)
-    @clients = Client.all
+    # authorize(Client)
+    @clients = Client.apply_filter(params)
     render json: @clients
   end
 
   def create
-    # authorize(Client)
     @client = Client.new(create_params)
     if @client.save
-      render json: @client
+      render_success('Successfully created the client', @client)
     else
-      render json: { error: 'Error Creating client.' }
+      render_errors(@client)
     end
   end
 
@@ -25,16 +24,16 @@ class Api::V1::Admin::ClientsController < Api::V1::BaseController
 
   def update
     if @client.update(create_params)
-      render json: @client
+      render_success('Successfully updated the client', @client)
     else
-      render json: { error: 'Error updating client.' }
+      render_errors(@client)
     end
   end
 
   def destroy
     # authorize(@client)
     @client.destroy
-    render json: { message: 'Client deleted successfully.' }
+    render_success('Successfully deleted the client')
   end
 
   def create_params
@@ -43,9 +42,10 @@ class Api::V1::Admin::ClientsController < Api::V1::BaseController
 
   def set_client
     @client = Client.find_by_id(params[:id])
+    not_found unless @client
   end
 
   def authorize(record, query = nil)
-    super([:api, :v1, :admin, record], query)
+    super([:api, :v1, record], query)
   end
 end

@@ -1,30 +1,51 @@
 # frozen_string_literal: true
 
 class Api::V1::UsersController < Api::V1::BaseController
-  before_action :authenticate_user!
+  before_action :set_user, only: %i[edit update destroy show]
 
-  def show; end
+  def index
+    @users = User.apply_filter(params)
+    render json: @users
+  end
+
+  def show
+    render json: @user
+  end
 
   def update
-    if current_user.update_attributes(user_params)
-      render :show
+    # authorize(@user)
+    if @user.update(user_params)
+      render json: @user
     else
-      render json: { errors: current_user.errors }, status: :unprocessable_entity
+      render json: { error: 'Error updating user.' }
     end
   end
 
-  def index
-    users = User.all
-    render json: { data: 'Hrllo' }
+  def destroy
+    # authorize(@client)
+    @user.destroy
+    render json: { message: 'User deleted successfully.' }
   end
 
-  def new
-    render json: { data: 'Hello testing' }
+  def create
+    @user = User.new(user_create_params)
+    if @user.save!
+      render json: @user
+    else
+      render json: { message: 'Unable to create user ' }
+    end
   end
 
-  private
+  def user_create_params
+    params.permit(:name, :email, :password, :type)
+  end
+
+  def set_user
+    @user = User.find_by_id(params[:id])
+    render not_found unless @user
+  end
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.permit(:name, :email, :id, :status, :image)
   end
 end

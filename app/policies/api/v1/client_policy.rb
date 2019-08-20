@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-class Api::V1::Admin::ClientPolicy < ApplicationPolicy
+class Api::V1::ClientPolicy < ApplicationPolicy
   def index?
-    @user.admin?
+    byebug
+    @user.admin? || @user.manager?
   end
 
   def create?

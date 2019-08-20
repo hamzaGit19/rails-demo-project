@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class Api::V1::CommentsSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :content
 end

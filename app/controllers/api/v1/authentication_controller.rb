@@ -3,23 +3,25 @@
 require "#{Rails.root}/lib/json_web_token.rb"
 
 class Api::V1::AuthenticationController < Api::V1::BaseController
-  def authenticate_user
-    user = User.find_for_database_authentication(email: params[:email])
-    if user.valid_password?(params[:password])
-      render json: payload(user)
+  before_action :authorize_request, except: :login
+
+  # POST /auth/login
+  def login
+    # byebug
+    @user = User.find_by_email(params[:email])
+    if @user&.valid_password?(params[:password])
+      token = JsonWebToken.encode(user_id: @user.id)
+      time = Time.now + 24.hours.to_i
+      render json: { token: token, exp: time.strftime('%m-%d-%Y %H:%M'),
+                     email: @user.email }, status: :ok
     else
-      render json: { errors: ['Invalid Username/Password'] }, status: :unauthorized
+      render json: { error: 'unauthorized' }, status: :unauthorized
     end
   end
 
   private
 
-  def payload(user)
-    return nil unless user&.id
-
-    {
-      auth_token: JsonWebToken.encode({ user_id: user.id }),
-      user: { id: user.id, email: user.email }
-    }
+  def login_params
+    params.permit(:email, :password)
   end
 end

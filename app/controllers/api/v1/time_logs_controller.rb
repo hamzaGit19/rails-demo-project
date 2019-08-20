@@ -16,13 +16,25 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
   def create
     @time_log = TimeLog.new(time_log_params)
     @time_log.project_id = @project.id
-    @time_log.creator_id = 16
+    @time_log.creator_id = current_user.id
+    if @time_log.save
+      render_success('Successfully updated the project', @time_log)
+    else
+      render_errors(@time_log)
+    end
   end
 
-  def update; end
+  def update
+    if @time_log.update(time_log_params)
+      render_success('Successfully updated the project', @time_log)
+    else
+      render_errors(@time_log)
+    end
+  end
 
   def destroy
     @time_log.destroy
+    render json: { messgae: 'Destroyed time log' }
   end
 
   private

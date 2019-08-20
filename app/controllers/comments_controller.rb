@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :load_commentable, only: %i[show edit update create]
+  before_action :load_commentable, only: %i[show edit update create index]
   before_action :set_comment, only: %i[edit update destroy]
 
-  def index; end
+  def index
+    @comments = @commentable.comments
+    render json: @comments
+  end
 
   def new; end
 

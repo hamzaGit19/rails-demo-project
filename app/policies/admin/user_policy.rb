@@ -18,7 +18,6 @@ class Admin::UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    byebug
     @user.admin?
   end
 
