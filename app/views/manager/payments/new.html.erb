@@ -1,4 +1,4 @@
 <div class="row">
-<%= link_to 'Back', url_for(:back), class:"btn btn-secondary pull-right" %>
+  <%= link_to 'Back', url_for(:back), class:"btn btn-secondary pull-right" %>
 </div>
 <%= render 'payments/form', project: @project, _url: manager_project_payments_path(@project) %>

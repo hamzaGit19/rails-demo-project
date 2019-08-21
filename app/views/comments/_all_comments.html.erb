@@ -1,19 +1,19 @@
-<div id="comments-all">
+<div id='comments-all'>
   <% @comments = object_.comments.order(:created_at).page(params[:comments_page]) %>
   <% object_.comments.each do |comment| %>
-    <div class="comment-wrap">
-      <div class="photo">
+    <div class='comment-wrap'>
+      <div class='photo'>
         <% @u=User.find(comment.creator_id) %>
         <%=  display_avatar_comment(@u) %>
       </div>
-      <div class="comment-block">
-        <p class="comment-text"><%= comment.content %></p>
-        <div class="bottom-comment">
-          <div class="comment-date"><%= comment.created_at%>\t</div>
-          <div class="comment-date"> By:<%= get_user_name(comment.creator_id)%></div>
-          <%if comment.creator_id == current_user.id%>
-            <span> <%= link_to('Delete',comment_path(comment), method: :delete, data:{confirm: "are you sure?"} ,class:"btn btn-warning btn-xs glyphicon glyphicon-edit pull-right")%></span>
-          <%end%>
+      <div class='comment-block'>
+        <p class='comment-text'><%= comment.content %></p>
+        <div class='bottom-comment'>
+          <div class='comment-date'><%= comment.created_at%>\t</div>
+          <div class='comment-date'> By:<%= get_user_name(comment.creator_id) %></div>
+          <% if comment.creator_id == current_user.id %>
+            <span> <%= link_to('Delete',comment_path(comment), method: :delete, data:{confirm: 'are you sure?'} ,class:'btn btn-warning btn-xs glyphicon glyphicon-edit pull-right') %></span>
+          <% end %>
         </div>
       </div>
     </div>

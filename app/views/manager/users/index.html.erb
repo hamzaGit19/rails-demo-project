@@ -1,44 +1,36 @@
-<p id="notice"><%= notice %></p>
-<%=render "dashboard/dashboard/partials/search-user", path: manager_users_path%>
-<div class="row">
-  <div class="well">
-    <div class="row">
-      <div class="span7">
-        <div class="widget stacked widget-table action-table">
-          <div class="widget-header">
-            <i class="icon-th-list"></i>
-          </div>
-          <div class="widget-content">
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Type</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @users.each do |person| %>
-                  <tr>
-                    <td><%=person.name%></td>
-                    <td><%=person.email%></td>
-                    <td><%=person.type%></td>
-                    <td><%=  person.status == true ? "Active" : "Inactive"%>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <!-- /widget-content -->
+<p id='notice'><%= notice %></p>
+<%= render 'dashboard/dashboard/partials/search-user', path: manager_users_path %>
+<div class='row'>
+  <div class='well'>
+    <div class='span7'>
+      <div class='widget stacked widget-table action-table'>
+        <div class='widget-header'>
+          <i class='icon-th-list'></i>
         </div>
-        <!-- /widget -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 offset-md-4">
-        <%= paginate @users %>
+        <div class='widget-content'>
+          <table class='table table-striped table-bordered'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |person| %>
+                <tr>
+                  <td><%= person.name %></td>
+                  <td><%= person.email %></td>
+                  <td><%= person.type %></td>
+                  <td><%= person.status == true ? 'Active' : 'Inactive' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @users %>
+        </div>
       </div>
     </div>
   </div>

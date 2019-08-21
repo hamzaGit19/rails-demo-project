@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class Api::V1::ProjectPolicy < ApplicationPolicy
+class Api::V1::Admin::TimeLogPolicy < ApplicationPolicy
   def create?
-    @user.admin? || @user.manager?
+    @user.admin? || @user.manager? || @user.employee?
   end
 
   def update?

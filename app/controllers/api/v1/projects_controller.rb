@@ -6,7 +6,7 @@ class Api::V1::ProjectsController < Api::V1::BaseController
   before_action :validate_user, only: %i[update create]
 
   def index
-    @projects = Project.all
+    @projects = Project.apply_filter(params, @current_user)
     render json: @projects
   end
 
@@ -72,5 +72,9 @@ class Api::V1::ProjectsController < Api::V1::BaseController
 
   def validate_user
     render json: { erro: 'You are not authorized to perform this action' } if @current_user.employee?
+  end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, record], query)
   end
 end

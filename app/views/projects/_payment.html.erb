@@ -1,4 +1,4 @@
-<table class="table" id ="payment">
+<table class='table' id ='payment'>
   <thead>
     <tr>
       <th>Amount</th>
@@ -8,17 +8,17 @@
     </tr>
   </thead>
   <tbody>
-    <%@payments = @project.payments.order(:created_at).page(params[:payments_page])%>
+    <% @payments = @project.payments.order(:created_at).page(params[:payments_page]) %>
     <% (@payments).each do |payment| %>
       <tr>
         <td><%= payment.amount %></td>
         <td><%= get_user_name(payment.creator_id) %></td>
         <td><%= payment.created_at %></td>
-        <td> <%=link_to(project_payment_path_path(@project,payment), class:"btn btn-info btn-xs glyphicon glyphicon-edit") do %>   <i class="fa fa-eye"></i> <%end%> </td>
+        <td><%= link_to(project_payment_path_path(@project,payment), class:'btn btn-info btn-xs glyphicon glyphicon-edit') do %>   <i class='fa fa-eye'></i> <% end %> </td>
       </tr>
     <%end%>
-    <div id="total_payment">
-      Total:<%=total_payments(@project)%>
+    <div id='total_payment'>
+      Total:<%=total_payments(@project) %>
       <%= paginate @payments, param_name: :payments_page %>
     </div>
   </tbody>

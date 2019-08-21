@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::ClientPolicy < ApplicationPolicy
-  def index?
-    @user.admin? || @user.manager?
-  end
-
+class Api::V1::PaymentPolicy < ApplicationPolicy
   def create?
     @user.admin? || @user.manager?
   end
@@ -14,10 +10,6 @@ class Api::V1::ClientPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.admin? || @user.manager?
-  end
-
-  def show?
     @user.admin? || @user.manager?
   end
 end

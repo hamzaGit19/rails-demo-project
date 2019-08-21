@@ -4,7 +4,6 @@ class Api::V1::ClientsController < Api::V1::BaseController
   before_action :set_client, only: %i[edit update destroy show]
 
   def index
-    # authorize(Client)
     @clients = Client.apply_filter(params)
     render json: @clients
   end

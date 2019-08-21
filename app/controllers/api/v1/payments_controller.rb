@@ -10,6 +10,7 @@ class Api::V1::PaymentsController < Api::V1::BaseController
   end
 
   def create
+    authorize(Payment)
     @payment = Payment.new(payment_params)
     @payment.project_id = @project.id
     @payment.creator_id = @current_user.id
@@ -26,6 +27,7 @@ class Api::V1::PaymentsController < Api::V1::BaseController
   end
 
   def update
+    authorize(Payment)
     if @payment.update(payment_params)
       render_success('Successfully updated the payment', @payment)
     else
@@ -51,5 +53,9 @@ class Api::V1::PaymentsController < Api::V1::BaseController
   def set_project
     @project = Project.find_by_id(params[:project_id])
     render not_found unless @project
+  end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, record], query)
   end
 end

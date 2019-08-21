@@ -1,26 +1,26 @@
-<div class="">
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#form3">
+<div class=''>
+  <button type='button' class='btn btn-danger' data-toggle='modal' data-target='#form3'>
     New payment
   </button>
 </div>
-<div class="modal fade" id="form3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+<div class='modal fade' id='form3' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header border-bottom-0'>
+        <h5 class='modal-title' id='exampleModalLabel'>Create Account</h5>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
         </button>
       </div>
       <%= form_with(model: Payment, url:_url,  remote: true) do |f| %>
-        <div class="modal-body">
-          <div class="form-group">
+        <div class='modal-body'>
+          <div class='form-group'>
             <label>Cost:</label>
-            <%=  f.number_field :amount,class:"form-control", min:100 %>
-            <span class="Error"></span> </div>
+            <%=  f.number_field :amount,class:'form-control', min:100 %>
+            <span class='Error'></span> </div>
         </div>
-        <div class="modal-footer border-top-0 d-flex justify-content-center">
-            <%= f.submit("Create", class:"btn btn-primary  btn-block")%>
+        <div class='modal-footer border-top-0 d-flex justify-content-center'>
+            <%= f.submit('Create', class:'btn btn-primary  btn-block') %>
         </div>
       <% end %>
     </div>

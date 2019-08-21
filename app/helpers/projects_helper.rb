@@ -70,7 +70,7 @@ module ProjectsHelper
   end
 
   def get_top_employees
-    Employee.where('time_logs.created_at > ?', Time.now - 7.days).joins('INNER JOIN time_logs ON users.id = time_logs.employee_id').limit(3).group(:name).count(:hours)
+    Employee.where('time_logs.created_at > ?', Time.now - 7.days).joins('INNER JOIN time_logs ON users.id = time_logs.employee_id').limit(3).group(:name).sum(:hours)
   end
 
   def get_top_client

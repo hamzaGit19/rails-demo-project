@@ -5,16 +5,8 @@ class ProjectsController < ApplicationController
   before_action :set_user, only: %i[show index]
 
   def index
-    @projects = if params[:title]
-                  params.merge!(role: current_user.type, user_id: current_user.id)
-                  Project.apply_filters(params)
-                else
-                  @projects = if current_user.employee?
-                                @user.projects
-                              else
-                                Project.all
-                              end
-                end
+    @projects = Project.apply_filter(params, @current_user)
+    @projects = @projects.page(params[:page])
   end
 
   def show

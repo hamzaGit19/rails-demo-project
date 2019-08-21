@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
     render json: { error: 'not_found' }
   end
 
+  def page_not_found
+    respond_to do |format|
+      format.html { render template: 'application/error404', layout: 'layouts/application', status: 404 }
+      format.all { render nothing: true, status: 404 }
+    end
+  end
+
   private
 
   def unauthorized_user
@@ -25,12 +32,5 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |user| user.permit(:name, :email, :password, :type) }
     devise_parameter_sanitizer.permit(:account_update) { |user| user.permit(:name, :email, :type, :password, :current_password) }
-  end
-
-  def page_not_found
-    respond_to do |format|
-      format.html { render template: 'application/error404', layout: 'layouts/application', status: 404 }
-      format.all { render nothing: true, status: 404 }
-    end
   end
 end

@@ -13,6 +13,10 @@ class Api::V1::BaseController < ActionController::API
     render json: { error: 'not_found' }
   end
 
+  def unauthorized_user
+    render json: { status: 'Permission denied', code: '101', fallback_msg: 'You are not authorized to do this action' }
+  end
+
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header

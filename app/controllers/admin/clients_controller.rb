@@ -13,7 +13,8 @@ class Admin::ClientsController < ApplicationController
 
   def index
     authorize(Client)
-    @clients = Client.page(params[:page])
+    @clients = Client.apply_filter(params)
+    @clients = @clients.page(params[:page])
   end
 
   def edit; end

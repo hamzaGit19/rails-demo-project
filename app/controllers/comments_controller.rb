@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
   end
 
   def load_commentable
+    byebug
     @resource = params[:resource]
     @id = params[:resource_id]
     @commentable = @resource.singularize.classify.constantize.find(@id)
@@ -32,7 +33,7 @@ class CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find_by_id(params[:id])
-    redirect_to(root_url, notice: 'Record not found') unless @comment
+    redirect_to(root_url, notice: "Record not found") unless @comment
   end
 
   def comments_params

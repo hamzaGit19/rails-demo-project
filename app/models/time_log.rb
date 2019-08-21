@@ -10,7 +10,7 @@ class TimeLog < ApplicationRecord
 
   validates :project, presence: true
   validates :creator_id, presence: true
-  validates :hours, presence: true, numericality: true
+  validates :hours, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :employee_id, presence: true
   validate :employee_exists
   validate :employee_on_project

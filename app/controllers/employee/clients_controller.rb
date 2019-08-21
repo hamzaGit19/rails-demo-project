@@ -6,7 +6,8 @@ class Employee::ClientsController < ApplicationController
   def show; end
 
   def index
-    @clients = Client.page(params[:page])
+    @clients = Client.apply_filter(params)
+    @clients = @clients.page(params[:page])
   end
 
   def set_client

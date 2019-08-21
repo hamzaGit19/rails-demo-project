@@ -1,8 +1,10 @@
-<div class="row">
+<div class='row'>
   <%= form_tag(path, method: :get,class: 'form-horizontal col-sm-6 offset-md-3') do %>
-    <%= text_field_tag :name, nil, placeholder: 'Search a user...', class: 'form-horizontal col-sm-9' %>
-    <%= button_tag(type: "submit", class: "btn btn-primary") do %>
-      <i class="fa fa-search"></i>
-    <% end %>
+    <div class='row'>
+      <%= text_field_tag :name, nil, placeholder: 'Search a user...', class: 'form-horizontal col-sm-9' %>
+      <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+        <i class='fa fa-search'></i>
+      <% end %>
+    </div>
   <% end %>
 </div>

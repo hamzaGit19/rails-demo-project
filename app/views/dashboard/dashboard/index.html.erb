@@ -1,16 +1,22 @@
-<div class="row">
-  <div class="col-md-6">
-    <%= column_chart  get_top_projects,  stacked: true,label:"Top projects",xtitle: "Project name", ytitle: "Earnings", title: "Top Projects", download: {background: "#3734eb"},  colors: ["#34ebb1", "#34ebb1"] %>
-  </div>
-  <div class="col-md-6">
-    <%= column_chart  get_bottome_projects, label: "Bottom projects",xtitle: "Project name", ytitle: "Earnings", title: "Bottom projects", download: {background: "#3734eb"},  colors: ["#d65b1e", "#d65b1e"] %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6">
-    <%= pie_chart get_top_client,  donut: true,label: "Top Clients", title: "Top Clients", download: {background: "#3734eb"},  colors: ["#34ebb1", "#d65b1e","#5ef4ff"] %>
-  </div>
-  <div class="col-md-6">
-    <%= pie_chart get_top_employees,  donut: true,label: "Top Performers", title: "Top Perfromers of this week", download: {background: "#3734eb"},  colors: ["#34ebb1", "#d65b1e","#5ef4ff"] %>
+<div class='row abc'>
+  <div class='well'>
+    <div class=''>
+      <div class='row'>
+        <div class='col-md-6'>
+          <%= column_chart  get_top_projects,  stacked: true,label:'Top projects',xtitle: 'Project name', ytitle: 'Earnings', title: 'Top Projects', download: {background: '#3734eb'},  colors: ['#34ebb1', '#34ebb1'] %>
+        </div>
+        <div class='col-md-6'>
+          <%= column_chart  get_bottome_projects, label: 'Bottom projects',xtitle: 'Project name', ytitle: 'Earnings', title: 'Bottom projects', download: {background: '#3734eb'},  colors: ['#d65b1e', '#d65b1e'] %>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-6'>
+          <%= pie_chart get_top_client,  donut: true,label: 'Top Clients', title: 'Top Clients', download: {background: '#3734eb'},  colors: ['#34ebb1', '#d65b1e','#5ef4ff'] %>
+        </div>
+        <div class='col-md-6'>
+          <%= pie_chart get_top_employees,  donut: true,label: 'Top Performers', title: 'Top Perfromers of this week', download: {background: '#3734eb'},  colors: ['#34ebb1', '#d65b1e','#5ef4ff'] %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Manager::ClientsController < ManagerBaseController
+class Manager::ClientsController < ApplicationController
   before_action :set_client, only: %i[edit update destroy show]
 
   def new
@@ -13,7 +13,8 @@ class Manager::ClientsController < ManagerBaseController
 
   def index
     authorize(Client)
-    @clients = Client.page(params[:page])
+    @clients = Client.apply_filter(params)
+    @clients = @clients.page(params[:page])
   end
 
   def edit

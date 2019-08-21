@@ -1,18 +1,16 @@
- 
- 
-<div class=" ">
-  <div class="row">
-    <div class="col-xs-12 ">
+<div class=' '>
+  <div class='row'>
+    <div class='col-xs-12 '>
       <nav>
-        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Overview</a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Comments</a>
+        <div class='nav nav-tabs nav-fill' id='nav-tab' role='tablist'>
+          <a class='nav-item nav-link active' id='nav-home-tab' data-toggle='tab' href='#nav-home' role='tab' aria-controls='nav-home' aria-selected='true'>Overview</a>
+          <a class='nav-item nav-link' id='nav-profile-tab' data-toggle='tab' href='#nav-profile' role='tab' aria-controls='nav-profile' aria-selected='false'>Comments</a>
         </div>
       </nav>
-      <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-          <div class="well">
-            <table class="table">
+      <div class='tab-content py-3 px-3 px-sm-0' id='nav-tabContent'>
+        <div class='tab-pane fade show active' id='nav-home' role='tabpanel' aria-labelledby='nav-home-tab'>
+          <div class='well'>
+            <table class='table'>
               <thead>
                 <tr>
                   <th>Field</th>
@@ -22,7 +20,7 @@
               <tbody>
                 <tr>
                   <th>Project Name</th>
-                  <td><%= @project.name%></td>
+                  <td><%= @project.name %></td>
                 </tr>
                 <tr>
                   <th>Description</th>
@@ -36,14 +34,13 @@
                   <th>Created by</th>
                   <td><%= get_user_name(@time_log.creator_id) %></td>
                 </tr>
-               
               </tbody>
             </table>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <div class="well">
-             <span><%= render 'comments/form', resource: "TimeLog", resource_id: @time_log.id, object_: @time_log %> </span>
+        <div class='tab-pane fade' id='nav-profile' role='tabpanel' aria-labelledby='nav-profile-tab'>
+          <div class='well'>
+            <span><%= render 'comments/form', resource: 'TimeLog', resource_id: @time_log.id, object_: @time_log %> </span>
           </div>
         </div>
       </div>

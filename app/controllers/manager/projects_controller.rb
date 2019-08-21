@@ -22,6 +22,11 @@ class Manager::ProjectsController < ProjectsController
     end
   end
 
+  def index
+    authorize(Project)
+    super
+  end
+
   def show
     authorize(Project)
     super

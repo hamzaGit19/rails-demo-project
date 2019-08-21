@@ -15,7 +15,7 @@ class Client < ApplicationRecord
     @clients = Client.where(nil) # creates an anonymous scope
     @clients = @clients.user_name(params[:name]) if params[:name].present?
     @clients = @clients.email(params[:email]) if params[:email].present?
-    @clients = @clients.email(params[:company]) if params[:company].present?
+    @clients = @clients.company(params[:company]) if params[:company].present?
     @clients
   end
 end

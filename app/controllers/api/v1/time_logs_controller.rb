@@ -52,4 +52,8 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
     @project = Project.find_by_id(params[:project_id])
     render json: { notice: 'Record not found' } unless @project
   end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, record], query)
+  end
 end

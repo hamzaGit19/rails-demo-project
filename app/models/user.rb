@@ -3,7 +3,6 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  include Filterable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   #  :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
@@ -18,7 +17,7 @@ class User < ApplicationRecord
   validates :type, presence: true, inclusion: { in: %w[Admin Manager Employee],
                                                 message: '%{value} is not a valid type' }
 
-  scope :managerUsers, -> { where.not type: %w[Admin] }
+  scope :manager_filter, -> { where.not type: %w[Admin] }
   scope :user_name, ->(name) { where('name like ?', "#{name}%") }
   scope :email, ->(email) { where email: email }
 
@@ -43,7 +42,6 @@ class User < ApplicationRecord
   end
 
   def self.apply_filter(params)
-    byebug
     @users = User.where(nil) # creates an anonymous scope
     @users = @users.user_name(params[:name]) if params[:name].present?
     @users = @users.email(params[:email]) if params[:email].present?

@@ -1,34 +1,33 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-      <div class="card card-signin my-5">
-        <div class="card-body">
-          <h5 class="card-title text-center">Edit Profile</h5>
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-9 col-md-7 col-lg-5 mx-auto'>
+      <div class='card card-signin my-5'>
+        <div class='card-body'>
+          <h5 class='card-title text-center'>Edit Profile</h5>
           <%= form_for(@user, url:user_path(@user)) do |f| %>
-            <%= render "devise/shared/error_messages", resource: @user %>
-            <div class="preview text-center">
+            <%= render 'devise/shared/error_messages', resource: @user %>
+            <div class='preview text-center'>
               <%=  display_avatar(@user) %>
-              <div class="browse-button form-group">
-                <i class="fa fa-pencil-alt"></i>
-                <%= f.file_field :image ,  class:"browse-input" ,id:"UploadedFile"%>
-                <%# <input class="browse-input" type="file" required name="UploadedFile" id="UploadedFile"/> %>
+              <div class='browse-button form-group'>
+                <i class='fa fa-pencil-alt'></i>
+                <%= f.file_field :image ,  class:'browse-input' ,id:'UploadedFile'%>
               </div>
-              <span class="Error"></span>
+              <span class='Error'></span>
             </div>
-            <div class="form-group">
+            <div class='form-group'>
               <label>Full Name:</label>
-              <%= f.text_field :name, autofocus: true, autocomplete: "name" ,class:"form-control", required:true %>
-              <span class="Error"></span>
+              <%= f.text_field :name, autofocus: true, autocomplete: 'name' ,class:'form-control', required:true %>
+              <span class='Error'></span>
             </div>
-            <div class="form-group">
+            <div class='form-group'>
               <label>Email:</label>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control" , required:true %>
-              <span class="Error"></span>
+              <%= f.email_field :email, autofocus: true, autocomplete: 'email',class:'form-control' , required:true %>
+              <span class='Error'></span>
             </div>
-            <div class="form-group">
-              <%= f.submit "Edit",  class:"btn btn-primary btn-block" %>
+            <div class='form-group'>
+              <%= f.submit 'Edit',  class:'btn btn-primary btn-block' %>
             </div>
-          <%end%>
+          <% end %>
         </div>
       </div>
     </div>

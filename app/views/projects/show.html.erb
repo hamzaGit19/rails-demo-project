@@ -1,20 +1,20 @@
-<div class=" ">
-  <div class="row">
-    <div class="col-xs-12 ">
+<div class=' '>
+  <div class='row'>
+    <div class='col-xs-12 '>
       <nav>
-        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Overview</a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Employees</a>
-          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Payments</a>
-          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Timelogs</a>
-          <a class="nav-item nav-link" id="nav-files-tab" data-toggle="tab" href="#nav-files" role="tab" aria-controls="nav-files" aria-selected="false">Files</a>
-          <a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab" aria-controls="nav-comments" aria-selected="false">Comments</a>
+        <div class='nav nav-tabs nav-fill' id='nav-tab' role='tablist'>
+          <a class='nav-item nav-link active' id='nav-home-tab' data-toggle='tab' href='#nav-home' role='tab' aria-controls='nav-home' aria-selected='true'>Overview</a>
+          <a class='nav-item nav-link' id='nav-profile-tab' data-toggle='tab' href='#nav-profile' role='tab' aria-controls='nav-profile' aria-selected='false'>Employees</a>
+          <a class='nav-item nav-link' id='nav-contact-tab' data-toggle='tab' href='#nav-contact' role='tab' aria-controls='nav-contact' aria-selected='false'>Payments</a>
+          <a class='nav-item nav-link' id='nav-about-tab' data-toggle='tab' href='#nav-about' role='tab' aria-controls='nav-about' aria-selected='false'>Timelogs</a>
+          <a class='nav-item nav-link' id='nav-files-tab' data-toggle='tab' href='#nav-files' role='tab' aria-controls='nav-files' aria-selected='false'>Files</a>
+          <a class='nav-item nav-link' id='nav-comments-tab' data-toggle='tab' href='#nav-comments' role='tab' aria-controls='nav-comments' aria-selected='false'>Comments</a>
         </div>
       </nav>
-      <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-          <div class="well">
-            <table class="table">
+      <div class='tab-content py-3 px-3 px-sm-0' id='nav-tabContent'>
+        <div class='tab-pane fade show active' id='nav-home' role='tabpanel' aria-labelledby='nav-home-tab'>
+          <div class='well'>
+            <table class='table'>
               <thead>
                 <tr>
                   <th>Field</th>
@@ -24,7 +24,7 @@
               <tbody>
                 <tr>
                   <th>Name</th>
-                  <td><%= @project.name%></td>
+                  <td><%= @project.name %></td>
                 </tr>
                 <tr>
                   <th>Description</th>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                   <th>Cost</th>
-                  <td><%=%>999</td>
+                  <td><%= %>999</td>
                 </tr>
                 <tr>
                   <th>Date</th>
@@ -58,9 +58,9 @@
             </table>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <div class="well">
-            <table class="table">
+        <div class='tab-pane fade' id='nav-profile' role='tabpanel' aria-labelledby='nav-profile-tab'>
+          <div class='well'>
+            <table class='table'>
               <thead>
                 <tr>
                   <th>Name</th>
@@ -77,28 +77,28 @@
                     <th><%= person %></th>
                     <td>Employee</td>
                   </tr>
-                <%end%>
+                <% end %>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-          <div class="well">
+        <div class='tab-pane fade' id='nav-contact' role='tabpanel' aria-labelledby='nav-contact-tab'>
+          <div class='well'>
             <% _payment_url = get_payment_url(current_user) %>
-            <%= render 'payment', project: @project%>
+            <%= render 'payment', project: @project %>
             <%= render 'payment_modal', project: @project, _url: _payment_url %>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-          <div class="well">
+        <div class='tab-pane fade' id='nav-about' role='tabpanel' aria-labelledby='nav-about-tab'>
+          <div class='well'>
             <% _time_url = get_time_url(current_user) %>
-            <%= render 'timelog', project: @project%>
+            <%= render 'timelog', project: @project %>
             <%= render 'timelog_modal', project: @project, _url: _time_url %>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
-          <div class="well">
-            <table class="table">
+        <div class='tab-pane fade' id='nav-files' role='tabpanel' aria-labelledby='nav-files-tab'>
+          <div class='well'>
+            <table class='table'>
               <thead>
                 <tr>
                   <th>File</th>
@@ -107,16 +107,16 @@
               <tbody>
                 <% @project.files.each do |file| %>
                   <tr>
-                    <td><%= link_to file.url, download:"" %></td>
+                    <td><%= link_to file.url, download:'' %></td>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">
-          <div class="well">
-            <span><%= render 'comments/form', resource: "Project", resource_id: @project.id, object_: @project %> </span>
+        <div class='tab-pane fade' id='nav-comments' role='tabpanel' aria-labelledby='nav-comments-tab'>
+          <div class='well'>
+            <span><%= render 'comments/form', resource: 'Project', resource_id: @project.id, object_: @project %> </span>
           </div>
         </div>
       </div>

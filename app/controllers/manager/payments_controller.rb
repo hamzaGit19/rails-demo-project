@@ -9,7 +9,6 @@ class Manager::PaymentsController < PaymentsController
   def update
     super
     authorize(@payment)
-
     if @payment.update(payment_params.except(:employees))
       redirect_to manager_project_payments_path(@project), notice: 'Payment was successfully updated.'
     else

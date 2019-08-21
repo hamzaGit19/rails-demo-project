@@ -39,4 +39,8 @@ class Api::V1::CommentsController < Api::V1::BaseController
   def comments_params
     params.permit(:content)
   end
+
+  def authorize(record, query = nil)
+    super([:api, :v1, record], query)
+  end
 end
