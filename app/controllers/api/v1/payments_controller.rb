@@ -15,7 +15,7 @@ class Api::V1::PaymentsController < Api::V1::BaseController
     @payment.project_id = @project.id
     @payment.creator_id = @current_user.id
     if @payment.save
-      render_success('Successfully updated the payment', @payment)
+      render_success("Successfully updated the payment", @payment)
     else
       render_errors(@payment)
     end
@@ -23,13 +23,13 @@ class Api::V1::PaymentsController < Api::V1::BaseController
 
   def destroy
     @payment.destroy
-    render json: { message: 'Payment deleted.' }
+    render json: { message: "Payment deleted." }
   end
 
   def update
     authorize(Payment)
     if @payment.update(payment_params)
-      render_success('Successfully updated the payment', @payment)
+      render_success("Successfully updated the payment", @payment)
     else
       render_errors(@payment)
     end
@@ -42,8 +42,7 @@ class Api::V1::PaymentsController < Api::V1::BaseController
   private
 
   def set_payment
-    @payment = Payment.find_by_id(params[:id])
-    render not_found unless @payment
+    @payment = Payment.find(params[:id])
   end
 
   def payment_params
@@ -51,8 +50,7 @@ class Api::V1::PaymentsController < Api::V1::BaseController
   end
 
   def set_project
-    @project = Project.find_by_id(params[:project_id])
-    render not_found unless @project
+    @project = Project.find(params[:project_id])
   end
 
   def authorize(record, query = nil)

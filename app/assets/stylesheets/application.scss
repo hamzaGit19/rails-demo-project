@@ -104,8 +104,8 @@ body {
 .form-label-group > input,
 .form-label-group > label {
   padding: var(--input-padding-y) var(--input-padding-x);
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .form-label-group > label {
@@ -673,4 +673,8 @@ p {
 
 .chosen-container {
   width: 100% !important;
+}
+
+.abc {
+  margin-top: 7%;
 }

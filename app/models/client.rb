@@ -7,15 +7,11 @@ class Client < ApplicationRecord
   validates :email, uniqueness: true
   validates :name, presence: true
 
-  scope :user_name, ->(name) { where('name like ?', "#{name}%") }
-  scope :email, ->(email) { where email: email }
-  scope :company, ->(company) { where('company like ?', "#{company}%") }
-
   def self.apply_filter(params)
-    @clients = Client.where(nil) # creates an anonymous scope
-    @clients = @clients.user_name(params[:name]) if params[:name].present?
-    @clients = @clients.email(params[:email]) if params[:email].present?
-    @clients = @clients.company(params[:company]) if params[:company].present?
+    @clients = Client.all # creates an anonymous scope
+    @clients = @clients.where("name like ?", "#{params[:name]}%") if params[:name].present?
+    @clients = @clients.where(params[:email]) if params[:email].present?
+    @clients = @clients.where("company like ?", "#{params[:company]}%") if params[:company].present?
     @clients
   end
 end

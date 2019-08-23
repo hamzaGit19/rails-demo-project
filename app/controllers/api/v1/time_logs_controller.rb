@@ -18,7 +18,7 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
     @time_log.project_id = @project.id
     @time_log.creator_id = current_user.id
     if @time_log.save
-      render_success('Successfully updated the project', @time_log)
+      render_success("Successfully updated the project", @time_log)
     else
       render_errors(@time_log)
     end
@@ -26,7 +26,7 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
 
   def update
     if @time_log.update(time_log_params)
-      render_success('Successfully updated the project', @time_log)
+      render_success("Successfully updated the project", @time_log)
     else
       render_errors(@time_log)
     end
@@ -34,14 +34,13 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
 
   def destroy
     @time_log.destroy
-    render json: { messgae: 'Destroyed time log' }
+    render json: { messgae: "Destroyed time log" }
   end
 
   private
 
   def set_time_log
-    @time_log = TimeLog.find_by_id(params[:id])
-    render json: { notice: 'Record not found' } unless @time_log
+    @time_log = TimeLog.find(params[:id])
   end
 
   def time_log_params
@@ -49,8 +48,7 @@ class Api::V1::TimeLogsController < Api::V1::BaseController
   end
 
   def set_project
-    @project = Project.find_by_id(params[:project_id])
-    render json: { notice: 'Record not found' } unless @project
+    @project = Project.find(params[:project_id])
   end
 
   def authorize(record, query = nil)

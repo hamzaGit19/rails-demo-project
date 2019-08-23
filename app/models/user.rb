@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  #  :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
 
   paginates_per 7
   mount_uploader :image, ImageUploader
@@ -15,11 +12,9 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   # validates :password_confirmation, presence: true
   validates :type, presence: true, inclusion: { in: %w[Admin Manager Employee],
-                                                message: '%{value} is not a valid type' }
+                                                message: "%{value} is not a valid type" }
 
   scope :manager_filter, -> { where.not type: %w[Admin] }
-  scope :user_name, ->(name) { where('name like ?', "#{name}%") }
-  scope :email, ->(email) { where email: email }
 
   def admin?
     instance_of?(Admin)
@@ -42,9 +37,9 @@ class User < ApplicationRecord
   end
 
   def self.apply_filter(params)
-    @users = User.where(nil) # creates an anonymous scope
-    @users = @users.user_name(params[:name]) if params[:name].present?
-    @users = @users.email(params[:email]) if params[:email].present?
+    @users = User.all # creates an anonymous scope
+    @users = @users.where("name like ?", "#{params[:name]}%") if params[:name].present?
+    @users = @users.where(where email: params[:email]) if params[:email].present?
     @users
   end
 end

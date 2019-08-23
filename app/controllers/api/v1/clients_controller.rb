@@ -5,13 +5,14 @@ class Api::V1::ClientsController < Api::V1::BaseController
 
   def index
     @clients = Client.apply_filter(params)
+    @clients = @clients.page(params[:page])
     render json: @clients
   end
 
   def create
     @client = Client.new(create_params)
     if @client.save
-      render_success('Successfully created the client', @client)
+      render_success("Successfully created the client", @client)
     else
       render_errors(@client)
     end
@@ -23,7 +24,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
 
   def update
     if @client.update(create_params)
-      render_success('Successfully updated the client', @client)
+      render_success("Successfully updated the client", @client)
     else
       render_errors(@client)
     end
@@ -32,7 +33,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   def destroy
     # authorize(@client)
     @client.destroy
-    render_success('Successfully deleted the client')
+    render_success("Successfully deleted the client")
   end
 
   def create_params
@@ -40,8 +41,7 @@ class Api::V1::ClientsController < Api::V1::BaseController
   end
 
   def set_client
-    @client = Client.find_by_id(params[:id])
-    not_found unless @client
+    @client = Client.find(params[:id])
   end
 
   def authorize(record, query = nil)

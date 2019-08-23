@@ -32,9 +32,8 @@ class Api::V1::CommentsController < Api::V1::BaseController
   end
 
   def set_comment
-    @comment = Comment.find_by_id(params[:id])
-    render json: { message: 'Record not found' } unless @comment
-  end
+    @comment = Comment.find(params[:id])
+   end
 
   def comments_params
     params.permit(:content)

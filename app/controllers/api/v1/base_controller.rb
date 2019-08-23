@@ -10,16 +10,16 @@ class Api::V1::BaseController < ActionController::API
   before_action :authorize_request
 
   def not_found
-    render json: { error: 'not_found' }
+    render json: { error: "not_found" }
   end
 
   def unauthorized_user
-    render json: { status: 'Permission denied', code: '101', fallback_msg: 'You are not authorized to do this action' }
+    render json: { status: "Permission denied", code: "101", fallback_msg: "You are not authorized to do this action" }
   end
 
   def authorize_request
-    header = request.headers['Authorization']
-    header = header.split(' ').last if header
+    header = request.headers["Authorization"]
+    header = header.split(" ").last if header
     begin
       @decoded = JsonWebToken.decode(header)
       @current_user = User.find(@decoded[:user_id])
@@ -31,11 +31,11 @@ class Api::V1::BaseController < ActionController::API
   end
 
   def render_errors(object)
-    render json: { status: 'Forbidden', code: 'WRONG_DATA', fallback_msg: object.errors.full_messages.join(', ') }
+    render json: { status: "Forbidden", code: "WRONG_DATA", fallback_msg: object.errors.full_messages.join(", ") }
   end
 
   def render_success(message = nil, object = nil)
     message ||= I18n.t("#{controller_name}.message.#{action_name}")
-    render json: { status: 'OK', code: 'OK', fallback_msg: message, object: object }
+    render json: { status: "OK", code: "OK", fallback_msg: message, object: object }
   end
 end

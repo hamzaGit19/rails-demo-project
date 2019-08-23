@@ -53,6 +53,7 @@ gem 'kaminari'
 gem 'mini_magick', '~> 4.3'
 gem 'pundit'
 gem 'rack-cors'
+gem 'searchkick'
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'

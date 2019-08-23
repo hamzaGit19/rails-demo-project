@@ -13,7 +13,12 @@ Rails.application.routes.draw do
       resources :users, param: :_username
       post "/auth/login", to: "authentication#login"
       # get "/*a", to: "application#not_found"
-
+      resource :user, controller: "profile" do
+        collection do
+          get "change_password"
+          patch "update_password"
+        end
+      end
       resources :comments
       resources :projects do
         resources :payments

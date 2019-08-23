@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'file_name' # Excluding ".pdf" extension.
+        render pdf: "file_name" # Excluding ".pdf" extension.
       end
     end
   end
@@ -27,14 +27,11 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params.except(:employees))
     @project.creator_id = current_user.id
-    employee_ids = get_employee_ids
-    add_employees(employee_ids)
+    @project.add_employees(project_params)
   end
 
   def update
-    @project.employees.delete(@project.employees)
-    employee_ids = get_employee_ids
-    add_employees(employee_ids)
+    @project.add_employees(project_params)
   end
 
   def destroy
@@ -45,32 +42,15 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find_by_id(params[:id])
-    redirect_to(root_url, notice: 'Record not found') unless @project
+    redirect_to(root_url, notice: "Record not found") unless @project
   end
 
   def set_user
     @user = User.find_by_id(current_user.id)
-    redirect_to(root_url, notice: 'Record not found') unless @user
+    redirect_to(root_url, notice: "Record not found") unless @user
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
     params.require(:project).permit(:name, :description, :manager_id, :client_id, :creator_id, :cost, employees: [], files: [])
-  end
-
-  def get_employee_ids
-    employee_ids = project_params[:employees]
-    employee_ids.delete('')
-    employee_ids
-  end
-
-  def add_employees(employee_ids)
-    employee_ids.each do |e_id|
-      # unless @project.employees.exists?(id: e_id)
-
-      @employee = Employee.find(e_id)
-      @project.employees << @employee
-      # end
-    end
   end
 end

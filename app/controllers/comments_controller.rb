@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
   def new; end
 
   def create
-    @comment = @commentable.comments.new(comments_params)
+    @comment = @resource.comments.new(comments_params)
     @comment.creator_id = current_user.id
     if @comment.save
     else
@@ -27,7 +27,9 @@ class CommentsController < ApplicationController
   def load_commentable
     byebug
     @resource = params[:resource]
+    @resource = @resource.singularize.classify.constantize
     @id = params[:resource_id]
+
     @commentable = @resource.singularize.classify.constantize.find(@id)
   end
 

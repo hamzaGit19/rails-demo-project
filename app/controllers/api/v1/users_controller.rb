@@ -17,14 +17,14 @@ class Api::V1::UsersController < Api::V1::BaseController
     if @user.update(user_params)
       render json: @user
     else
-      render json: { error: 'Error updating user.' }
+      render json: { error: "Error updating user." }
     end
   end
 
   def destroy
     # authorize(@client)
     @user.destroy
-    render json: { message: 'User deleted successfully.' }
+    render json: { message: "User deleted successfully." }
   end
 
   def create
@@ -32,7 +32,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     if @user.save!
       render json: @user
     else
-      render json: { message: 'Unable to create user ' }
+      render json: { message: "Unable to create user " }
     end
   end
 
@@ -41,8 +41,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def set_user
-    @user = User.find_by_id(params[:id])
-    render not_found unless @user
+    @user = User.find(params[:id])
   end
 
   def user_params
